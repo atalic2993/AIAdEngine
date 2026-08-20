@@ -1,0 +1,146 @@
+import Link from "next/link";
+import { ButtonLink, Container } from "@/components/ui";
+import { HeroConsole, HeroConsoleCompact } from "@/components/mockups";
+import { FacebookMark, GoogleMark, InstagramMark, TikTokMark } from "@/components/logos";
+
+const NOTS = ["No complicated Ads Manager", "No agency retainers", "No long-term contracts"];
+
+const CHANNELS = [
+  { name: "Facebook", Mark: FacebookMark, tint: "text-[#0866FF]" },
+  { name: "Instagram", Mark: InstagramMark, tint: "" },
+  { name: "Google", Mark: GoogleMark, tint: "" },
+  { name: "TikTok", Mark: TikTokMark, tint: "text-ink" },
+];
+
+export function Hero() {
+  return (
+    <section className="hero-shell relative flex flex-col overflow-hidden border-b border-line">
+      {/* Layered light: a wide arc from the top, a pool under the console. */}
+      <div className="bg-engine pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="rule-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+
+      <Container className="hero-stage relative hero-pad flex flex-1 items-center">
+        <div className="hero-gap grid w-full items-center gap-5 sm:gap-8 md:gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,1fr)] lg:gap-12">
+          <div className="text-center lg:text-left">
+            <p className="glass inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 sm:gap-2.5 sm:px-3.5 sm:py-1.5">
+              <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-2" />
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-chrome sm:text-[11px] sm:tracking-[0.16em]">
+                Built for South African businesses
+              </span>
+            </p>
+
+            <h1 className="display hero-title mt-3 uppercase sm:mt-5">
+              <span className="chrome-text">Stop boosting posts.</span>
+              <br />
+              <span className="text-electric">Start running ads that grow your business.</span>
+            </h1>
+
+            <p className="hero-sub mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-muted sm:mt-5 sm:text-[17px] lg:mx-0">
+              Launch smarter ads across Facebook, Instagram, Google and TikTok — powered by AI.
+            </p>
+
+            <ul className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 sm:mt-5 sm:gap-x-5 lg:justify-start">
+              {NOTS.map((line) => (
+                <li key={line} className="flex items-center gap-1.5 text-[12.5px] text-chrome sm:gap-2 sm:text-[14px]">
+                  <svg
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    className="size-3.5 shrink-0 text-brand-2"
+                    fill="none"
+                  >
+                    <path
+                      d="M3 8.4 6.2 11.6 13 4.8"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  {line}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-4 flex items-center gap-2.5 sm:mt-7 sm:justify-center sm:gap-3 lg:justify-start">
+              <ButtonLink
+                href="/#pricing"
+                size="md"
+                className="flex-1 sm:flex-none sm:min-h-[52px] sm:px-6 sm:text-[15px]"
+              >
+                Get started
+              </ButtonLink>
+              <ButtonLink
+                href="/#how-it-works"
+                variant="ghost"
+                size="md"
+                className="flex-1 sm:flex-none sm:min-h-[52px] sm:px-6 sm:text-[15px]"
+              >
+                See how it works
+              </ButtonLink>
+            </div>
+
+            <p className="mt-3 flex flex-wrap items-baseline justify-center gap-x-2 gap-y-0.5 text-[13px] text-muted sm:mt-5 sm:gap-x-2.5 sm:text-sm lg:justify-start">
+              <span className="eyebrow">From</span>
+              <span className="display tnum text-xl text-ink sm:text-2xl">R599</span>
+              <span>
+                per month<span className="hero-drop"> · priced in Rands</span> · cancel anytime
+              </span>
+            </p>
+          </div>
+
+          {/* The product, on a lit stage. */}
+          <div>
+            <div className="hero-floor relative">
+              <div className="hero-console-wrap relative">
+                <div className="sm:hidden">
+                  <HeroConsoleCompact />
+                </div>
+                <div className="hidden sm:block">
+                  <HeroConsole />
+                </div>
+              </div>
+            </div>
+            <p className="hero-note mt-2 text-center text-[10px] text-muted-2 sm:mt-4 sm:text-[11px] lg:text-right">
+              Interface illustration. Example figures, not a performance promise.
+            </p>
+          </div>
+        </div>
+      </Container>
+
+      {/* Proof strip closes the hero: what it runs on, and one real result. */}
+      <Container className="relative">
+        <div className="hairline-x h-px w-full" aria-hidden="true" />
+        <div className="flex items-center justify-between gap-3 py-2.5 sm:gap-4 sm:py-4">
+          <div className="flex items-center gap-2.5 sm:gap-4">
+            <span className="eyebrow hidden shrink-0 sm:inline">Runs on</span>
+            <span
+              className="flex items-center gap-3 sm:gap-4"
+              aria-label="Facebook, Instagram, Google and TikTok"
+            >
+              {CHANNELS.map((channel) => (
+                <channel.Mark key={channel.name} className={`size-4 sm:size-5 ${channel.tint}`} />
+              ))}
+            </span>
+          </div>
+
+          <Link
+            href="/#results"
+            className="glass flex min-h-[44px] items-center gap-2 rounded-full border border-line px-3 transition-colors hover:border-line-strong sm:gap-3 sm:px-4"
+          >
+            <span className="eyebrow hidden sm:inline">Real SA result</span>
+            <span className="tnum text-[12.5px] text-ink sm:text-sm">
+              R4K<span className="text-muted-2">/mo</span>
+              <span aria-hidden="true" className="mx-1.5 text-brand-2">
+                →
+              </span>
+              R165K+<span className="text-muted-2">/mo</span>
+            </span>
+            <span className="hidden font-mono text-[11px] uppercase tracking-[0.16em] text-brand-2 sm:inline">
+              See how
+            </span>
+          </Link>
+        </div>
+      </Container>
+    </section>
+  );
+}
