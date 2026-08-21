@@ -74,18 +74,67 @@ Until these are filled in, the footer and contact page simply leave those lines 
 
 ---
 
-## Step 5 — PayFast side
+## Step 5 — Connect the payments (PayFast)
 
-In your PayFast dashboard:
+### 5a. In the PayFast dashboard
 
-1. **Settings → Integration**: copy the Merchant ID and Merchant Key, and set a **Passphrase**. Send me all three. The passphrase is what stops anyone editing the price in their browser.
-2. Confirm with PayFast that **recurring subscriptions (subscription_type 1)** are enabled on the account. Some accounts have to ask for it.
-3. Upload your KYC documents. PayFast verifies under FICA, so expect to supply:
-   - Sole proprietor: SA ID or passport, proof of address not older than three months, bank confirmation letter or recent statement
-   - Registered company: CIPC registration documents, proof of business address, bank account confirmation, ID documents for all directors, beneficial ownership where applicable
-   - Blurry scans, an address older than three months, or details that do not match CIPC are the usual causes of delay.
+Log in at **my.payfast.co.za** → **Settings** → **Integration**.
 
-When you send me the three PayFast values I switch the site from sandbox to live.
+1. **Merchant ID** — an 8 digit number. Copy it.
+2. **Merchant Key** — a short string of letters and numbers. Copy it.
+3. **Security passphrase** (sometimes shown as "Salt passphrase") — click Set / Change, enter a strong passphrase with no spaces, save it. Write it down; PayFast will not show it again in full.
+
+   The passphrase is what makes the payment tamper-proof. The site uses it to fingerprint the amount and plan before sending you to PayFast. Without it, someone could edit R599 to R1 in their browser.
+
+4. **Instant Transaction Notification (ITN)** — switch it on. If there is a Notify URL field, set it to:
+
+   ```
+   https://aiadengine.co.za/api/payfast/itn
+   ```
+
+   The site also sends this address with every transaction, so the dashboard field is a backstop rather than the main setting.
+
+5. **Recurring billing / subscriptions** — confirm it is enabled on the account. Some accounts have to request it. Without it, PayFast rejects the monthly subscription and only allows once-off payments.
+
+### 5b. Put the three values into the site
+
+Do this yourself so the secrets never travel through a chat window. Either:
+
+**In the Vercel dashboard** — Project `ai-ad-engine` → Settings → Environment Variables → add each one for **Production**:
+
+| Name | Value |
+| --- | --- |
+| `PAYFAST_MERCHANT_ID` | your 8 digit merchant ID |
+| `PAYFAST_MERCHANT_KEY` | your merchant key |
+| `PAYFAST_PASSPHRASE` | the passphrase you just set |
+
+**Or in a terminal**, from `AIAdEngine/web`, one at a time. Each command asks for the value, and what you type is not shown:
+
+```bash
+vercel env add PAYFAST_MERCHANT_ID production
+vercel env add PAYFAST_MERCHANT_KEY production
+vercel env add PAYFAST_PASSPHRASE production
+```
+
+Tell me when they are in. I switch `PAYFAST_SANDBOX` to `false` and redeploy, which is the moment the checkout starts pointing at real PayFast instead of their test system.
+
+### 5c. Proof the keys work, without spending a cent
+
+Once it is redeployed I generate one real checkout handoff and post it to PayFast. PayFast either accepts the fingerprint or answers "Generated signature does not match submitted signature". That proves the merchant ID, key and passphrase all line up, and no card is involved.
+
+If PayFast rejects it, the cause is almost always one of: passphrase typed with a trailing space, the merchant key copied from the wrong account, or the passphrase saved in PayFast after the value was copied.
+
+### 5d. KYC documents
+
+PayFast verifies businesses under FICA. As a registered company, expect to supply:
+
+- CIPC registration documents
+- Proof of business address
+- Bank account confirmation in the company name
+- ID documents for all directors
+- Beneficial ownership information where applicable
+
+Delays are nearly always blurry scans, proof of address older than three months, or details that do not match CIPC exactly.
 
 ---
 
