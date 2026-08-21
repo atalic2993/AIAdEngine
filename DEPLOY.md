@@ -6,14 +6,14 @@ Domain: `aiadengine.co.za`, registered at HostAfrica, managed at `panel.hostafri
 
 ## Live right now
 
-Temporary address: **https://ai-ad-engine-rose.vercel.app** (Vercel project `ai-ad-engine`, team `atalic2993-personal-project`, deployed 2026-08-21).
+**https://aiadengine.co.za** — live since 2026-08-21, SSL valid, DNS pointing at Vercel from HostAfrica.
 
-State of that deployment:
-- PayFast runs in **sandbox** mode, so the checkout goes to PayFast's test system, never real money.
-- Search engines are blocked (`robots.txt` disallows everything) until `NEXT_PUBLIC_SITE_URL` is set, so this address can never compete with aiadengine.co.za in Google.
-- No domain attached, no pixels loaded, no DNS touched.
+- Vercel project `ai-ad-engine`, team `atalic2993-personal-project`, **connected to GitHub** (`atalic2993/AIAdEngine`), Root Directory `web`. A push to `main` deploys.
+- PayFast is in **live** mode (merchant 11073115). A signed handoff was accepted by PayFast, so the keys and passphrase are correct.
+- Pixels are still off, no tracking IDs supplied yet.
+- `www` serves the site as well as the apex; canonical tags point at the apex.
 
-Redeploy after a change: `cd web && vercel deploy --prod --yes`.
+Manual redeploy: `vercel deploy --prod --yes` **from the repo root** (`AIAdEngine/`), not from `web/`, because Vercel's Root Directory is `web`.
 
 ## The one thing that decides everything
 

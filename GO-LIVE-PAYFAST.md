@@ -2,7 +2,7 @@
 
 Follow these in order. Steps 1 and 2 are yours (they need your HostAfrica login). Steps 3 onward I do, or we do together.
 
-Current state: the site is deployed and the Vercel project already has `aiadengine.co.za` and `www.aiadengine.co.za` attached. It is waiting for DNS. The site also already knows its real address, so canonical links, the sitemap and the PayFast return address all point at aiadengine.co.za.
+**Status 2026-08-21: live.** https://aiadengine.co.za resolves, SSL is valid, and the checkout is in live PayFast mode with merchant 11073115. PayFast accepted a real signed handoff (HTTP 302, no card, no money), which proves the merchant ID, merchant key and passphrase all match. Steps 1, 2 and 5b are done; what remains is the business details, the recurring billing check and the live R599 test.
 
 ---
 
