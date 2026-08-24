@@ -4,9 +4,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { trackConversion } from "@/lib/events";
 import type { Plan } from "@/lib/plans";
+import { SA_MOBILE_LENGTH, SA_MOBILE_PATTERN } from "@/lib/phone";
 
 const field =
-  "min-h-[48px] w-full rounded-xl border border-line bg-navy/45 px-4 text-[16px] text-ink placeholder:text-muted-2 transition-colors focus:border-brand/60";
+  "min-h-[44px] w-full rounded-xl border border-line bg-navy/45 px-3.5 text-[16px] text-ink placeholder:text-muted-2 transition-colors focus:border-brand/60";
+
+const labelClass = "mb-1.5 block text-[13px] text-muted";
 
 export function CheckoutForm({ plan }: { plan: Plan }) {
   const [submitting, setSubmitting] = useState(false);
@@ -22,13 +25,13 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
           contentName: plan.itemName,
         });
       }}
-      className="space-y-5"
+      className="space-y-3.5"
     >
       <input type="hidden" name="plan" value={plan.id} />
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-3.5 sm:grid-cols-2">
         <div>
-          <label htmlFor="name_first" className="mb-2 block text-sm text-muted">
+          <label htmlFor="name_first" className={labelClass}>
             First name
           </label>
           <input
@@ -43,7 +46,7 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
           />
         </div>
         <div>
-          <label htmlFor="name_last" className="mb-2 block text-sm text-muted">
+          <label htmlFor="name_last" className={labelClass}>
             Last name
           </label>
           <input
@@ -59,58 +62,122 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
         </div>
       </div>
 
-      <div>
-        <label htmlFor="email_address" className="mb-2 block text-sm text-muted">
-          Email address
-        </label>
-        <input
-          id="email_address"
-          name="email_address"
-          type="email"
-          required
-          autoComplete="email"
-          inputMode="email"
-          spellCheck={false}
-          placeholder="you@yourbusiness.co.za…"
-          className={field}
-        />
-        <p className="mt-2 text-xs text-muted-2">
-          Your login and receipts go here, so use one you actually check.
-        </p>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-3.5 sm:grid-cols-2">
         <div>
-          <label htmlFor="cell_number" className="mb-2 block text-sm text-muted">
-            Mobile number <span className="text-muted-2">(optional)</span>
+          <label htmlFor="email_address" className={labelClass}>
+            Email address
+          </label>
+          <input
+            id="email_address"
+            name="email_address"
+            type="email"
+            required
+            autoComplete="email"
+            inputMode="email"
+            spellCheck={false}
+            placeholder="you@yourbusiness.co.za…"
+            className={field}
+          />
+        </div>
+        <div>
+          <label htmlFor="cell_number" className={labelClass}>
+            Mobile number <span className="text-muted-2">(SA, 10 digits)</span>
           </label>
           <input
             id="cell_number"
             name="cell_number"
             type="tel"
+            required
             autoComplete="tel"
-            inputMode="tel"
+            inputMode="numeric"
             spellCheck={false}
-            placeholder="082 000 0000…"
-            className={field}
-          />
-        </div>
-        <div>
-          <label htmlFor="business_name" className="mb-2 block text-sm text-muted">
-            Business name <span className="text-muted-2">(optional)</span>
-          </label>
-          <input
-            id="business_name"
-            name="business_name"
-            type="text"
-            autoComplete="organization"
-            placeholder="Your business…"
+            pattern={SA_MOBILE_PATTERN}
+            maxLength={SA_MOBILE_LENGTH}
+            title="Ten digits, starting 06, 07 or 08. No spaces and no +27. Example: 0821234567"
+            placeholder="0821234567"
             className={field}
           />
         </div>
       </div>
 
-      <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-line bg-navy/45 p-4 text-sm leading-relaxed text-muted has-checked:border-brand/50 has-checked:bg-brand-soft">
+      <div className="grid gap-3.5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="business_name" className={labelClass}>
+            Business name
+          </label>
+          <input
+            id="business_name"
+            name="business_name"
+            type="text"
+            required
+            autoComplete="organization"
+            placeholder="Your business…"
+            className={field}
+          />
+        </div>
+        <div>
+          <label htmlFor="business_niche" className={labelClass}>
+            Business niche
+          </label>
+          <input
+            id="business_niche"
+            name="business_niche"
+            type="text"
+            required
+            list="niche-options"
+            placeholder="Plumbing, dentistry, gym…"
+            className={field}
+          />
+          <datalist id="niche-options">
+            <option value="Home services" />
+            <option value="Construction and trades" />
+            <option value="Health and medical" />
+            <option value="Beauty and wellness" />
+            <option value="Fitness" />
+            <option value="Property and real estate" />
+            <option value="Motor and automotive" />
+            <option value="Retail and e-commerce" />
+            <option value="Hospitality and food" />
+            <option value="Professional services" />
+            <option value="Education and training" />
+            <option value="Financial services" />
+          </datalist>
+        </div>
+      </div>
+
+      <div className="grid gap-3.5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="business_address" className={labelClass}>
+            Business address
+          </label>
+          <input
+            id="business_address"
+            name="business_address"
+            type="text"
+            required
+            autoComplete="street-address"
+            placeholder="Street, suburb, city…"
+            className={field}
+          />
+        </div>
+        <div>
+          <label htmlFor="website" className={labelClass}>
+            Website <span className="text-muted-2">(optional)</span>
+          </label>
+          <input
+            id="website"
+            name="website"
+            type="text"
+            inputMode="url"
+            autoComplete="url"
+            spellCheck={false}
+            placeholder="yourbusiness.co.za…"
+            className={field}
+          />
+        </div>
+      </div>
+
+      <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-line bg-navy/45 p-3.5 text-[13px] leading-relaxed text-muted has-checked:border-brand/50 has-checked:bg-brand-soft">
         <input
           type="checkbox"
           name="consent"
@@ -141,7 +208,7 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
 
       <button
         type="submit"
-        className="inline-flex min-h-[54px] w-full touch-manipulation items-center justify-center gap-2.5 rounded-xl bg-brand px-6 text-[15px] font-semibold text-navy shadow-[0_1px_0_rgba(255,255,255,0.35)_inset,0_14px_36px_-16px_rgba(11,132,246,0.9)] transition-colors hover:bg-[#2f97ff] active:translate-y-px"
+        className="inline-flex min-h-[50px] w-full touch-manipulation items-center justify-center gap-2.5 rounded-xl bg-brand px-6 text-[15px] font-semibold text-navy shadow-[0_1px_0_rgba(255,255,255,0.35)_inset,0_14px_36px_-16px_rgba(11,132,246,0.9)] transition-colors hover:bg-[#2f97ff] active:translate-y-px"
       >
         {submitting ? (
           <span
@@ -156,8 +223,9 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
         {submitting ? "Taking you to PayFast…" : ""}
       </p>
 
-      <p className="text-center text-xs text-muted-2">
-        Card details are entered on PayFast, never on this site.
+      <p className="text-center text-[11px] text-muted-2">
+        Card details are entered on PayFast, never on this site. Every field is used to build your
+        advertising account.
       </p>
     </form>
   );

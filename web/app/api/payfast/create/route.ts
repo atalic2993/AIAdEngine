@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { PLANS, isPlanId } from "@/lib/plans";
 import { compactFields, money, payfastConfig, signatureFor, type PayfastFields } from "@/lib/payfast";
+import { parseSaMobile } from "@/lib/phone";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -49,12 +50,30 @@ export async function POST(request: Request) {
   const firstName = String(form.get("name_first") ?? "").trim().slice(0, 100);
   const lastName = String(form.get("name_last") ?? "").trim().slice(0, 100);
   const email = String(form.get("email_address") ?? "").trim().slice(0, 100);
-  const cell = String(form.get("cell_number") ?? "").replace(/[^\d+]/g, "").slice(0, 15);
-  const business = String(form.get("business_name") ?? "").trim().slice(0, 255);
+  // Rejected outright if it is not a South African mobile number, and stored in
+  // the ten-digit form PayFast expects.
+  const mobile = parseSaMobile(String(form.get("cell_number") ?? ""));
+  const cell = mobile?.local ?? "";
+  const business = String(form.get("business_name") ?? "").trim().slice(0, 200);
+  const address = String(form.get("business_address") ?? "").trim().slice(0, 250);
+  // These two share one custom field, so each half is capped to stay inside
+  // PayFast's 255-character limit, and the pipe that separates them is stripped.
+  const niche = String(form.get("business_niche") ?? "").replace(/\|/g, " ").trim().slice(0, 100);
+  const website = String(form.get("website") ?? "").replace(/\|/g, "").trim().slice(0, 150);
   const consent = String(form.get("consent") ?? "");
 
-  if (!email || !consent) {
-    return NextResponse.redirect(new URL(`/checkout/${planId}`, site), 303);
+  // Everything except the website is required.
+  if (
+    !firstName ||
+    !lastName ||
+    !email ||
+    !cell ||
+    !business ||
+    !address ||
+    !niche ||
+    !consent
+  ) {
+    return NextResponse.redirect(new URL(`/checkout/${planId}?incomplete=1`, site), 303);
   }
 
   const draft: PayfastFields = {
@@ -70,8 +89,15 @@ export async function POST(request: Request) {
     amount: money(plan.price),
     item_name: plan.itemName,
     item_description: plan.itemDescription,
+    // PayFast only echoes the name and email fields back on its notification,
+    // so everything else the customer typed rides along in the custom fields.
+    // These are what reach GoHighLevel once the payment is confirmed.
     custom_str1: planId,
     custom_str2: business,
+    custom_str3: cell,
+    custom_str4: address,
+    // Only five custom fields exist, so the last two share one, split on a pipe.
+    custom_str5: `${niche}|${website}`,
     email_confirmation: "1",
     confirmation_address: email,
     // Recurring monthly subscription, not a once-off payment.
@@ -81,7 +107,7 @@ export async function POST(request: Request) {
     cycles: "0", // until cancelled
   };
 
-  if (cell) draft.cell_number = cell;
+  draft.cell_number = cell;
 
   const fields = compactFields(draft);
   const signature = signatureFor(fields, config.passphrase);

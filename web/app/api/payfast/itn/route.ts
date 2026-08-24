@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import { PLANS, isPlanId } from "@/lib/plans";
 import { payfastConfig, signatureForItn } from "@/lib/payfast";
+import { postToGhl, purchasePayload, purchaseWebhookUrl } from "@/lib/ghl";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -103,8 +104,10 @@ export async function POST(request: Request) {
   }
 
   if (data.payment_status === "COMPLETE" && amountOk && plan) {
-    await sendMetaPurchase(data, plan.price);
-    // TODO(onboarding): create the customer account and send the welcome email.
+    await Promise.all([
+      sendMetaPurchase(data, plan.price),
+      postToGhl(purchaseWebhookUrl(), purchasePayload(data, plan.name, plan.price), "purchase"),
+    ]);
   }
 
   return new Response("ok", { status: 200 });
