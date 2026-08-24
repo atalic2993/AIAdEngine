@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter } from "@/components/site-footer";
-import { Container } from "@/components/ui";
+import { ButtonLink, Check, Container } from "@/components/ui";
 import { LogoLockup } from "@/components/brand";
 import { PLANS, isPlanId } from "@/lib/plans";
 import { PurchaseTracking } from "./purchase-tracking";
@@ -14,15 +14,15 @@ export const metadata: Metadata = {
 const STEPS = [
   {
     title: "Check your inbox",
-    body: "Your login details and payment confirmation are on their way to the email address you used at checkout. If it is not there in a few minutes, check spam.",
+    body: "Your payment confirmation is on its way to the email address you used at checkout. If it is not there in a few minutes, check spam.",
+  },
+  {
+    title: "We build your account",
+    body: "Using the details you gave us at checkout, our team sets up your own AI Ad Engine account and emails you the login.",
   },
   {
     title: "Connect your advertising accounts",
     body: "Facebook and Instagram, Google, TikTok. Connect the ones you already use. You only do this once.",
-  },
-  {
-    title: "Tell us about your business",
-    body: "Your offer, your area, who you want to reach. This is what the AI uses to build campaigns that sound like you.",
   },
   {
     title: "Launch your first campaign",
@@ -44,38 +44,66 @@ export default async function WelcomePage({ searchParams }: PageProps<"/welcome"
         </Container>
       </header>
 
-      <main id="main" className="bg-engine">
-        <Container className="py-16 sm:py-20">
-          <p className="eyebrow">Payment received</p>
-          <h1 className="display mt-4 max-w-3xl text-[clamp(2rem,6vw,3.4rem)] uppercase">
-            Welcome to AI Ad Engine.
-          </h1>
-          <p className="mt-5 max-w-xl text-[17px] text-muted">
-            You are in. Let us get your advertising engine running.
-          </p>
+      <main id="main">
+        {/* Confirmation hero, sized to the screen so the whole receipt is in
+            view the moment PayFast sends the customer back. */}
+        <section className="bg-engine flex min-h-[calc(100svh-65px)] items-center border-b border-line py-10">
+          <Container className="text-center">
+            <span
+              aria-hidden="true"
+              className="mx-auto grid size-16 place-items-center rounded-full border border-brand/50 bg-brand-soft"
+            >
+              <Check className="size-8 text-brand-2" />
+            </span>
 
-          {plan ? (
-            <div className="mt-8 inline-flex flex-wrap items-center gap-x-6 gap-y-2 rounded-card border border-brand/40 bg-brand-soft px-5 py-4">
-              <span>
-                <span className="eyebrow block">Plan</span>
-                <span className="display text-lg uppercase">{plan.name}</span>
-              </span>
-              <span>
-                <span className="eyebrow block">Subscription</span>
-                <span className="tnum text-[15px]">{plan.priceLabel} per month</span>
-              </span>
-              {reference ? (
-                <span>
-                  <span className="eyebrow block">Reference</span>
-                  <span className="font-mono text-[13px]" translate="no">
-                    {reference}
-                  </span>
-                </span>
-              ) : null}
+            <p className="eyebrow mt-7">Payment received</p>
+            <h1 className="display mx-auto mt-4 max-w-4xl text-[clamp(2rem,6vw,3.6rem)] uppercase">
+              Welcome to AI Ad Engine.
+            </h1>
+            <p className="mx-auto mt-5 max-w-lg text-[17px] leading-relaxed text-muted">
+              You are in. Your subscription is active and our team is building your account now.
+            </p>
+
+            {plan ? (
+              <dl className="mx-auto mt-9 inline-flex flex-wrap items-center justify-center gap-x-8 gap-y-4 rounded-card border border-brand/40 bg-brand-soft px-6 py-4 text-left">
+                <div>
+                  <dt className="eyebrow">Plan</dt>
+                  <dd className="display mt-0.5 text-lg uppercase">{plan.name}</dd>
+                </div>
+                <div>
+                  <dt className="eyebrow">Subscription</dt>
+                  <dd className="tnum mt-0.5 text-[15px]">{plan.priceLabel} per month</dd>
+                </div>
+                {reference ? (
+                  <div>
+                    <dt className="eyebrow">Reference</dt>
+                    <dd className="mt-0.5 font-mono text-[13px]" translate="no">
+                      {reference}
+                    </dd>
+                  </div>
+                ) : null}
+              </dl>
+            ) : null}
+
+            <div className="mt-9 flex flex-wrap justify-center gap-3">
+              <ButtonLink href="/book-a-demo" size="lg">
+                Book your setup call
+              </ButtonLink>
+              <ButtonLink href="#next" variant="ghost" size="lg">
+                What happens next
+              </ButtonLink>
             </div>
-          ) : null}
 
-          <h2 className="display mt-14 text-xl uppercase tracking-[0.04em]">What happens next</h2>
+            <p className="mt-6 text-sm text-muted-2">
+              A confirmation email is on its way to the address you used at checkout.
+            </p>
+          </Container>
+        </section>
+
+        <Container className="py-16 sm:py-20">
+          <h2 id="next" className="display scroll-mt-24 text-xl uppercase tracking-[0.04em]">
+            What happens next
+          </h2>
           <ol className="mt-6 grid gap-4 md:grid-cols-2">
             {STEPS.map((step, index) => (
               <li
