@@ -53,46 +53,9 @@ export function Product() {
         </div>
 
         <VisualNote>
-          Interface illustrations. Figures shown are examples, not a performance promise. Product
-          screenshots and a full walkthrough are on the way.
+          Interface illustrations. Figures shown are examples, not a performance promise. The
+          walkthrough below is a recording of the real platform.
         </VisualNote>
-      </Container>
-    </Section>
-  );
-}
-
-export function VideoSlot() {
-  return (
-    <Section id="demo" className="border-b border-line">
-      <Container>
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="eyebrow">Walkthrough</p>
-          <h2 className="display mt-4 text-[clamp(1.9rem,5vw,3.1rem)] uppercase">
-            See AI Ad Engine in action.
-          </h2>
-          <p className="mt-4 text-[16px] text-muted">
-            A short screen recording of the platform, start to finish.
-          </p>
-        </div>
-
-        <div className="mx-auto mt-10 max-w-4xl">
-          <div className="relative aspect-video overflow-hidden rounded-card border border-line bg-navy-2">
-            {/* Replace this block with the embed once the walkthrough is recorded. */}
-            <div className="bg-engine absolute inset-0 grid place-items-center">
-              <div className="text-center">
-                <span
-                  aria-hidden="true"
-                  className="mx-auto grid size-16 place-items-center rounded-full border border-brand/40 bg-brand-soft"
-                >
-                  <svg viewBox="0 0 24 24" className="size-6 text-brand" fill="currentColor">
-                    <path d="M8 5.5v13l11-6.5-11-6.5Z" />
-                  </svg>
-                </span>
-                <p className="mt-4 text-sm text-muted">Product walkthrough coming soon</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </Container>
     </Section>
   );

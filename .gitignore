@@ -11,3 +11,7 @@ Thumbs.db
 
 # Vercel link
 /.vercel
+
+# Raw source drops. web/public/demo.mp4 is the copy the site ships,
+# so the original does not need to live in git twice.
+/assets/
