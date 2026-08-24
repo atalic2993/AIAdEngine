@@ -24,11 +24,23 @@ export default function ContactPage() {
               Talk to a human.
             </h1>
             <p className="mt-5 text-[16px] leading-relaxed text-muted">
-              You do not need a demo call to sign up, but if something is unclear, ask first. We
-              would rather answer a question than have you subscribe to the wrong plan.
+              You do not need a demo call to sign up, but if something is unclear, ask first or
+              book a walkthrough. We would rather answer a question than have you subscribe to the
+              wrong plan.
             </p>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
+              <Link
+                href="/book-a-demo"
+                className="flex min-h-[110px] flex-col justify-between rounded-card border border-brand/40 bg-brand-soft p-5 transition-colors hover:border-brand/60 sm:col-span-2"
+              >
+                <span className="eyebrow">Book a demo</span>
+                <span className="text-[15px]">
+                  Pick a time and we will walk you through the platform on a call. Free, and you do
+                  not have to be a customer.
+                </span>
+              </Link>
+
               <a
                 href={`mailto:${EMAIL}`}
                 className="flex min-h-[110px] flex-col justify-between rounded-card border border-line bg-navy-2/70 p-5 transition-colors hover:border-line-strong hover:bg-white/[0.04]"

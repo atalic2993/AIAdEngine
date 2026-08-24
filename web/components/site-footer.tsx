@@ -7,6 +7,7 @@ import { BUSINESS, DELIVERY_PROMISE } from "@/lib/business";
 const LINKS = [
   { href: "/", label: "AI Ad Engine" },
   { href: "/#pricing", label: "Pricing" },
+  { href: "/book-a-demo", label: "Book a demo" },
   { href: "/terms", label: "Terms & Conditions" },
   { href: "/refund-cancellation-policy", label: "Refund & Cancellation Policy" },
   { href: "/privacy", label: "Privacy Policy" },
