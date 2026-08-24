@@ -124,6 +124,76 @@ body {
 }
 
 /* ---------------------------------------------------------------
+   Book a demo button. Sits next to the primary call to action, so it
+   has to read as the quieter of the two while still catching the eye.
+   A slow pulse on the dot suggests times are open; the sheen only
+   runs on hover, so nothing moves until the pointer is on it.
+
+   Both stop entirely under the reduced-motion rule further up.
+   --------------------------------------------------------------- */
+.cta-demo {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cta-demo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translateX(-130%);
+  background: linear-gradient(
+    105deg,
+    transparent 32%,
+    rgba(159, 224, 255, 0.3) 50%,
+    transparent 68%
+  );
+}
+
+.cta-demo:hover::after,
+.cta-demo:focus-visible::after {
+  animation: cta-sheen 900ms ease-out;
+}
+
+@keyframes cta-sheen {
+  to {
+    transform: translateX(130%);
+  }
+}
+
+.cta-demo-dot {
+  position: relative;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--color-brand-2);
+  box-shadow: 0 0 10px rgba(63, 196, 238, 0.9);
+}
+
+.cta-demo-dot::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  border: 1px solid var(--color-brand-2);
+  animation: cta-ping 2.6s cubic-bezier(0.2, 0.7, 0.3, 1) infinite;
+}
+
+@keyframes cta-ping {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  70%,
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+/* ---------------------------------------------------------------
    Hero treatment: chrome and electric-blue lettering, a stage that
    the product console sits on, and glass detailing.
    --------------------------------------------------------------- */
