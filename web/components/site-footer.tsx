@@ -4,14 +4,25 @@ import { LogoMark, TAGLINE, Wordmark } from "@/components/brand";
 import { RESULTS_DISCLAIMER, SPEND_DISCLOSURE } from "@/lib/plans";
 import { BUSINESS, DELIVERY_PROMISE } from "@/lib/business";
 
-const LINKS = [
+const COMPANY_LINKS = [
   { href: "/", label: "AI Ad Engine" },
   { href: "/#pricing", label: "Pricing" },
   { href: "/book-a-demo", label: "Book a demo" },
+  { href: "/contact", label: "Contact" },
   { href: "/terms", label: "Terms & Conditions" },
   { href: "/refund-cancellation-policy", label: "Refund & Cancellation Policy" },
   { href: "/privacy", label: "Privacy Policy" },
-  { href: "/contact", label: "Contact" },
+];
+
+/**
+ * The channel pages. They also live here so they are reachable from every page
+ * on the site rather than only from the sitemap.
+ */
+const CHANNEL_LINKS = [
+  { href: "/facebook-ads-south-africa", label: "Facebook & Instagram ads" },
+  { href: "/google-ads-south-africa", label: "Google ads" },
+  { href: "/tiktok-ads-south-africa", label: "TikTok ads" },
+  { href: "/vs-marketing-agency", label: "Versus a marketing agency" },
 ];
 
 export function SiteFooter() {
@@ -33,19 +44,38 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <nav aria-label="Footer">
-            <ul className="grid gap-x-10 gap-y-3 sm:grid-cols-2">
-              {LINKS.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted transition-colors hover:text-ink"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <nav aria-label="Footer" className="grid gap-8 sm:grid-cols-2 sm:gap-x-12">
+            <div>
+              <h2 className="eyebrow">Advertising channels</h2>
+              <ul className="mt-4 space-y-3">
+                {CHANNEL_LINKS.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted transition-colors hover:text-ink"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="eyebrow">Company</h2>
+              <ul className="mt-4 space-y-3">
+                {COMPANY_LINKS.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted transition-colors hover:text-ink"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </nav>
         </div>
 
@@ -67,7 +97,7 @@ export function SiteFooter() {
             {BUSINESS.phone ? (
               <>
                 {" · "}
-                <a href={`tel:${BUSINESS.phone.replace(/s/g, "")}`} className="hover:text-ink">
+                <a href={`tel:${BUSINESS.phone.replace(/\s/g, "")}`} className="hover:text-ink">
                   {BUSINESS.phone}
                 </a>
               </>

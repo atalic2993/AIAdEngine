@@ -122,14 +122,26 @@ export function signatureForItn(
   return crypto.createHash("md5").update(parts.join("&")).digest("hex");
 }
 
+/**
+ * The note the ITN writes and the welcome page looks for, so a reference can
+ * only be treated as paid once PayFast has actually confirmed it.
+ */
+export function confirmationKey(reference: string): string {
+  return `payfast:confirmed:${reference}`;
+}
+
 export function money(amount: number): string {
   return amount.toFixed(2);
 }
 
-/** PayFast posts ITNs from these networks only. */
-export const PAYFAST_ITN_HOSTS = [
-  "www.payfast.co.za",
-  "sandbox.payfast.co.za",
-  "w1w.payfast.co.za",
-  "w2w.payfast.co.za",
-];
+/**
+ * Compares two signatures without leaking, through how long the check takes,
+ * how much of a guess was right. Lengths are compared first because
+ * timingSafeEqual throws when the two buffers are different sizes.
+ */
+export function signaturesMatch(expected: string, received: string): boolean {
+  const a = Buffer.from(expected ?? "", "utf8");
+  const b = Buffer.from(received ?? "", "utf8");
+  if (a.length !== b.length) return false;
+  return crypto.timingSafeEqual(a, b);
+}

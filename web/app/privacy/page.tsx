@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "How AI Ad Engine collects, uses and protects personal information, in line with South African data protection law including POPIA.",
+  alternates: { canonical: "/privacy" },
+  openGraph: {
+    title: "Privacy Policy | AI Ad Engine",
+    description: "How AI Ad Engine collects, uses and protects personal information, in line with South African data protection law including POPIA.",
+    url: "/privacy",
+  },
 };
 
 const INTRO = [
@@ -132,6 +138,13 @@ const BLOCKS: LegalBlock[] = [
 
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Privacy Policy" updated="August 2026" intro={INTRO} blocks={BLOCKS} />
+    <LegalPage
+      title="Privacy Policy"
+      path="/privacy"
+      description="How AI Ad Engine collects, uses and protects personal information, in line with South African data protection law including POPIA."
+      updated="August 2026"
+      intro={INTRO}
+      blocks={BLOCKS}
+    />
   );
 }

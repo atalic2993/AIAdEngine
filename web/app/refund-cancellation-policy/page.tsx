@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: "Refund & Cancellation Policy",
   description:
     "How AI Ad Engine subscriptions are cancelled, when refunds apply and what happens to advertising spend paid to third-party platforms.",
+  alternates: { canonical: "/refund-cancellation-policy" },
+  openGraph: {
+    title: "Refund & Cancellation Policy | AI Ad Engine",
+    description: "How AI Ad Engine subscriptions are cancelled, when refunds apply and what happens to advertising spend paid to third-party platforms.",
+    url: "/refund-cancellation-policy",
+  },
 };
 
 const BLOCKS: LegalBlock[] = [
@@ -102,6 +108,12 @@ const BLOCKS: LegalBlock[] = [
 
 export default function RefundPolicyPage() {
   return (
-    <LegalPage title="Refund & Cancellation Policy" updated="August 2026" blocks={BLOCKS} />
+    <LegalPage
+      title="Refund & Cancellation Policy"
+      path="/refund-cancellation-policy"
+      description="How AI Ad Engine subscriptions are cancelled, when refunds apply and what happens to advertising spend paid to third-party platforms."
+      updated="August 2026"
+      blocks={BLOCKS}
+    />
   );
 }

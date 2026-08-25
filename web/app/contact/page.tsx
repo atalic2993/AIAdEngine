@@ -4,10 +4,21 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ButtonLink, Container } from "@/components/ui";
 import { BUSINESS, DELIVERY_PROMISE } from "@/lib/business";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbSchema, graph, webPageSchema } from "@/lib/schema";
+
+const DESCRIPTION =
+  "Contact AI Ad Engine about plans, billing or your account. Email support, or book a free walkthrough if you would rather talk it through.";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with AI Ad Engine before or after you subscribe.",
+  description: DESCRIPTION,
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact AI Ad Engine",
+    description: DESCRIPTION,
+    url: "/contact",
+  },
 };
 
 const EMAIL = BUSINESS.email;
@@ -15,6 +26,22 @@ const EMAIL = BUSINESS.email;
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={graph(
+          {
+            ...webPageSchema({
+              path: "/contact",
+              name: "Contact AI Ad Engine",
+              description: DESCRIPTION,
+            }),
+            "@type": "ContactPage",
+          },
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+        )}
+      />
       <SiteHeader />
       <main id="main">
         <Container className="py-14 sm:py-20">

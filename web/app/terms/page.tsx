@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: "Terms & Conditions",
   description:
     "The terms that govern use of the AI Ad Engine website, platform, advertising tools and related services.",
+  alternates: { canonical: "/terms" },
+  openGraph: {
+    title: "Terms & Conditions | AI Ad Engine",
+    description: "The terms that govern use of the AI Ad Engine website, platform, advertising tools and related services.",
+    url: "/terms",
+  },
 };
 
 const BLOCKS: LegalBlock[] = [
@@ -215,6 +221,12 @@ const BLOCKS: LegalBlock[] = [
 
 export default function TermsPage() {
   return (
-    <LegalPage title="Terms & Conditions" updated="August 2026" blocks={BLOCKS} />
+    <LegalPage
+      title="Terms & Conditions"
+      path="/terms"
+      description="The terms that govern use of the AI Ad Engine website, platform, advertising tools and related services."
+      updated="August 2026"
+      blocks={BLOCKS}
+    />
   );
 }

@@ -5,6 +5,8 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ButtonLink, Check, Container, Section } from "@/components/ui";
 import { BUSINESS } from "@/lib/business";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbSchema, graph, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Book a demo",
@@ -51,6 +53,20 @@ const AGENDA = [
 export default function BookADemoPage() {
   return (
     <>
+      <JsonLd
+        data={graph(
+          webPageSchema({
+            path: "/book-a-demo",
+            name: "Book a demo of AI Ad Engine",
+            description:
+              "Book a free walkthrough of AI Ad Engine. Pick a time that suits you. No payment needed to book.",
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Book a demo", path: "/book-a-demo" },
+          ]),
+        )}
+      />
       <SiteHeader />
       <main id="main">
         {/* Full-bleed hero sized to the screen, so the calendar is in view on load. */}
