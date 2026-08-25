@@ -44,11 +44,14 @@ export function LogoLockup({
   href = "/",
   size = 36,
   className = "",
+  wordmarkClassName = "",
   priority = false,
 }: {
   href?: string;
   size?: number;
   className?: string;
+  /** Lets a cramped bar (the phone header) fall back to the mark alone. */
+  wordmarkClassName?: string;
   priority?: boolean;
 }) {
   return (
@@ -58,7 +61,7 @@ export function LogoLockup({
       aria-label="AI Ad Engine home"
     >
       <LogoMark size={size} priority={priority} />
-      <Wordmark className="text-[15px]" />
+      <Wordmark className={`text-[15px] ${wordmarkClassName}`} />
     </Link>
   );
 }

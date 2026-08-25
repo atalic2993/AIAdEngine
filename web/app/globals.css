@@ -124,6 +124,25 @@ body {
 }
 
 /* ---------------------------------------------------------------
+   Header calls to action. On a phone the bar carries the logo mark
+   plus both buttons, so they tighten up below the sm breakpoint and
+   relax back to full size once there is room.
+   --------------------------------------------------------------- */
+.header-cta {
+  gap: 0.5rem;
+  padding-inline: 0.75rem;
+  font-size: 13px;
+}
+
+@media (min-width: 40rem) {
+  .header-cta {
+    gap: 0.625rem;
+    padding-inline: 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* ---------------------------------------------------------------
    Book a demo button. Sits next to the primary call to action, so it
    has to read as the quieter of the two while still catching the eye.
    A slow pulse on the dot suggests times are open; the sheen only
