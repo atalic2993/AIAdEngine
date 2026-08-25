@@ -19,6 +19,7 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
    * state. Two submissions would mean two PayFast references for one customer.
    */
   const sent = useRef(false);
+  const [stalled, setStalled] = useState(false);
 
   useEffect(() => {
     // Coming back with the browser's Back button can restore this page from the
@@ -28,10 +29,24 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
       if (!event.persisted) return;
       sent.current = false;
       setSubmitting(false);
+      setStalled(false);
     }
     window.addEventListener("pageshow", revive);
     return () => window.removeEventListener("pageshow", revive);
   }, []);
+
+  useEffect(() => {
+    if (!submitting) return;
+    // Submitting takes the browser off this page entirely, so if we are still
+    // sitting here fifteen seconds later the request did not get through. Hand
+    // the form back rather than leaving somebody staring at a dead button.
+    const timer = setTimeout(() => {
+      sent.current = false;
+      setSubmitting(false);
+      setStalled(true);
+    }, 15_000);
+    return () => clearTimeout(timer);
+  }, [submitting]);
 
   return (
     <form
@@ -43,6 +58,7 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
           return;
         }
         sent.current = true;
+        setStalled(false);
         setSubmitting(true);
         trackConversion("InitiateCheckout", {
           value: plan.price,
@@ -245,8 +261,15 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
         {submitting ? "Taking you to PayFast…" : "Continue to PayFast"}
       </button>
 
-      <p aria-live="polite" className="sr-only">
-        {submitting ? "Taking you to PayFast…" : ""}
+      <p
+        aria-live="polite"
+        className={stalled ? "text-center text-[13px] text-warn" : "sr-only"}
+      >
+        {stalled
+          ? "That did not go through. Check your connection and try again."
+          : submitting
+            ? "Taking you to PayFast…"
+            : ""}
       </p>
 
       <p className="text-center text-[11px] text-muted-2">

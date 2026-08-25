@@ -65,7 +65,12 @@ export function purchasePayload(
     payfast_payment_id: data.pf_payment_id ?? "",
     payment_status: data.payment_status ?? "",
     source: "aiadengine.co.za checkout",
+    // When we handled the notification, which is close to but not the same as
+    // when the customer was billed. Kept under its original name so existing
+    // GoHighLevel field mappings keep working, with PayFast's own billing date
+    // alongside it for anyone who needs the real one.
     paid_at: new Date().toISOString(),
+    payfast_billing_date: (data.billing_date ?? "").trim(),
   };
 }
 
