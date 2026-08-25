@@ -1,12 +1,38 @@
+import Link from "next/link";
 import { Container, Section } from "@/components/ui";
 import { FacebookMark, GoogleMark, InstagramMark, TikTokMark } from "@/components/logos";
 import { LogoMark, TAGLINE } from "@/components/brand";
 
 const CHANNELS = [
-  { name: "Facebook", Mark: FacebookMark, tint: "text-[#0866FF]", note: "Feed, Reels, Stories" },
-  { name: "Instagram", Mark: InstagramMark, tint: "", note: "Feed, Reels, Stories" },
-  { name: "Google", Mark: GoogleMark, tint: "", note: "Search, Display, YouTube" },
-  { name: "TikTok", Mark: TikTokMark, tint: "text-ink", note: "In-feed video" },
+  {
+    name: "Facebook",
+    Mark: FacebookMark,
+    tint: "text-[#0866FF]",
+    note: "Feed, Reels, Stories",
+    href: "/facebook-ads-south-africa",
+  },
+  {
+    name: "Instagram",
+    Mark: InstagramMark,
+    tint: "",
+    note: "Feed, Reels, Stories",
+    // Meta runs both from one system, so both lead to the same explainer.
+    href: "/facebook-ads-south-africa",
+  },
+  {
+    name: "Google",
+    Mark: GoogleMark,
+    tint: "",
+    note: "Search, Display, YouTube",
+    href: "/google-ads-south-africa",
+  },
+  {
+    name: "TikTok",
+    Mark: TikTokMark,
+    tint: "text-ink",
+    note: "In-feed video",
+    href: "/tiktok-ads-south-africa",
+  },
 ];
 
 /**
@@ -25,19 +51,27 @@ export function Channels() {
         <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_140px_minmax(0,0.9fr)]">
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
             {CHANNELS.map((channel) => (
-              <li
-                key={channel.name}
-                className="group flex items-center gap-3 rounded-card border border-line bg-navy-2/70 p-4 transition-colors hover:border-line-strong"
-              >
-                <span className="grid size-11 shrink-0 place-items-center rounded-xl border border-line bg-navy/45">
-                  <channel.Mark className={`size-5 ${channel.tint}`} />
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-[15px] font-semibold" translate="no">
-                    {channel.name}
+              <li key={channel.name}>
+                <Link
+                  href={channel.href}
+                  className="group flex min-h-[44px] items-center gap-3 rounded-card border border-line bg-navy-2/70 p-4 transition-colors hover:border-line-strong"
+                >
+                  <span className="grid size-11 shrink-0 place-items-center rounded-xl border border-line bg-navy/45">
+                    <channel.Mark className={`size-5 ${channel.tint}`} />
                   </span>
-                  <span className="block truncate text-xs text-muted-2">{channel.note}</span>
-                </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[15px] font-semibold" translate="no">
+                      {channel.name}
+                    </span>
+                    <span className="block truncate text-xs text-muted-2">{channel.note}</span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="shrink-0 text-muted-2 transition-colors group-hover:text-brand-2"
+                  >
+                    →
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>
