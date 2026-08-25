@@ -58,7 +58,7 @@ export const CHANNELS: Channel[] = [
       },
       {
         name: "Reels, on both",
-        body: "Short vertical video. Currently the cheapest attention on Meta, and the format that most rewards a good first three seconds.",
+        body: "Short vertical video. Usually among the cheaper placements on Meta, and the format that most rewards a good first three seconds.",
       },
       {
         name: "Stories",
@@ -208,7 +208,7 @@ export const CHANNELS: Channel[] = [
     eyebrow: "TikTok",
     h1: "TikTok ads, without becoming a content creator.",
     standfirst:
-      "TikTok is where attention is cheapest, and where a lot of South African businesses still are not advertising. That gap is the opportunity, and it closes a little every month.",
+      "TikTok is often cheaper to advertise on than the older platforms, and a lot of South African businesses still are not there. That gap is the opportunity, and it closes a little every month.",
     intent:
       "TikTok cares less about who you target and more about whether people watch. The algorithm shows your video to a small group, measures whether they stayed, and decides from there. That makes it unusually fair to small businesses: a good video from a one person operation can outperform a polished one from a national brand.",
     placements: [

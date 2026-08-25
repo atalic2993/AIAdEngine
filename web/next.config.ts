@@ -34,6 +34,8 @@ const ALLOWED = {
     "https://*.analytics.google.com",
     "https://*.google-analytics.com",
     "https://analytics.tiktok.com",
+    // Google Analytics linked to Google Ads reports conversions through here.
+    "https://*.doubleclick.net",
     "https://*.leadconnectorhq.com",
   ],
   /** Tracking pixels are ordinary images as far as the browser is concerned. */
@@ -44,7 +46,7 @@ const ALLOWED = {
     "https://*.google-analytics.com",
     "https://www.google.com",
     "https://www.google.co.za",
-    "https://googleads.g.doubleclick.net",
+    "https://*.doubleclick.net",
     "https://analytics.tiktok.com",
     "https://*.leadconnectorhq.com",
     "https://*.msgsndr.com",

@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 import { PLANS, isPlanId } from "@/lib/plans";
 import { confirmationKey, payfastConfig, signatureForItn, signaturesMatch } from "@/lib/payfast";
 import { postToGhl, purchasePayload, purchaseWebhookUrl, type PaymentKind } from "@/lib/ghl";
-import { claimOnce, hasDurableStore, remember } from "@/lib/idempotency";
+import { claimOnce, forget, hasDurableStore, remember } from "@/lib/idempotency";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -135,21 +135,53 @@ export async function POST(request: Request) {
     return new Response("ok", { status: 200 });
   }
 
-  const firstTimeSeeingPayment = await claimOnce(
-    `payfast:payment:${paymentId}`,
-    PAYMENT_TTL_SECONDS,
-  );
+  const paymentKey = `payfast:payment:${paymentId}`;
 
-  if (!firstTimeSeeingPayment) {
-    console.log("[payfast:itn] duplicate, already handled", { pf_payment_id: paymentId });
-    return new Response("ok", { status: 200 });
+  /**
+   * Which values might identify this subscription across its whole life.
+   *
+   * PayFast's own documentation does not pin down which of these stays put from
+   * the signup through to every later renewal, so both are claimed. A renewal
+   * only has to match on one of them to be recognised, whichever field PayFast
+   * turns out to keep stable.
+   */
+  const subscriptionRefs = [...new Set([data.token, data.m_payment_id].filter(Boolean))];
+  const subscriptionKeys = subscriptionRefs.length
+    ? subscriptionRefs.map((ref) => `payfast:subscription:${ref}`)
+    : [`payfast:subscription:${paymentId}`];
+
+  const claimedSubscriptionKeys: string[] = [];
+  let kind: PaymentKind;
+
+  try {
+    const firstTimeSeeingPayment = await claimOnce(paymentKey, PAYMENT_TTL_SECONDS);
+
+    if (!firstTimeSeeingPayment) {
+      console.log("[payfast:itn] duplicate, already handled", { pf_payment_id: paymentId });
+      return new Response("ok", { status: 200 });
+    }
+
+    // Claimed one at a time so a failure part way through still knows exactly
+    // which claims it needs to give back.
+    const claimResults: boolean[] = [];
+    for (const key of subscriptionKeys) {
+      const claimed = await claimOnce(key);
+      claimResults.push(claimed);
+      if (claimed) claimedSubscriptionKeys.push(key);
+    }
+
+    // Only a payment where every reference is brand new is a genuine signup.
+    // If any one of them has been seen before, this subscription already exists.
+    kind = claimResults.every(Boolean) ? "first" : "renewal";
+  } catch (error) {
+    // The store is configured but unreachable. Rather than guess and risk
+    // onboarding an existing customer all over again, ask PayFast to try later.
+    console.error("[payfast:itn] payment memory unavailable, asking PayFast to retry", {
+      pf_payment_id: paymentId,
+      error: error instanceof Error ? error.message : String(error),
+    });
+    return new Response("payment memory unavailable", { status: 503 });
   }
-
-  // The subscription reference stays the same for every monthly renewal, so
-  // whoever claims it first is the signup and everything after is a renewal.
-  const subscriptionRef = data.token || data.m_payment_id || paymentId;
-  const isFirstPayment = await claimOnce(`payfast:subscription:${subscriptionRef}`);
-  const kind: PaymentKind = isFirstPayment ? "first" : "renewal";
 
   console.log("[payfast:itn] accepted", {
     pf_payment_id: paymentId,
@@ -160,18 +192,44 @@ export async function POST(request: Request) {
     durableStore: hasDurableStore(),
   });
 
-  await Promise.all([
+  // An empty string is not caught by ??, and an empty event id would stop Meta
+  // pairing the browser event with this one.
+  const eventId = data.m_payment_id || paymentId;
+
+  const [, delivered] = await Promise.all([
     // Renewals are real revenue but they are not new conversions, so only the
     // first payment is reported to the ad platforms.
-    kind === "first" ? sendMetaPurchase(data, plan.price, data.m_payment_id ?? paymentId) : null,
+    kind === "first" ? sendMetaPurchase(data, plan.price, eventId) : Promise.resolve(),
     postToGhl(purchaseWebhookUrl(), purchasePayload(data, plan.name, plan.price, kind), kind),
-    // This is the only place a reference is ever marked as paid. The welcome
-    // page checks for it rather than trusting whatever is in its own address
-    // bar, so a shared or edited link cannot report a sale that never happened.
-    data.m_payment_id
-      ? remember(confirmationKey(data.m_payment_id), CONFIRMATION_TTL_SECONDS)
-      : null,
   ]);
+
+  if (!delivered) {
+    // The customer has paid but their details did not reach the CRM. Give back
+    // every claim so a retry is able to do the work properly, and answer with an
+    // error so PayFast sends this notification again. Without this the sale
+    // would be lost silently and no replay could ever recover it.
+    await Promise.all([forget(paymentKey), ...claimedSubscriptionKeys.map(forget)]);
+    console.error("[payfast:itn] CRM delivery failed, claims released for retry", {
+      pf_payment_id: paymentId,
+      reference: data.m_payment_id,
+    });
+    return new Response("crm delivery failed", { status: 503 });
+  }
+
+  // Marked as paid only once the sale is safely recorded. This is the note the
+  // welcome page looks for instead of trusting whatever is in its address bar.
+  if (data.m_payment_id) {
+    try {
+      await remember(confirmationKey(data.m_payment_id), CONFIRMATION_TTL_SECONDS);
+    } catch (error) {
+      // The sale is already recorded, so this must not fail the notification.
+      // The welcome page falls back to saying the payment is still confirming.
+      console.error("[payfast:itn] could not mark reference as paid", {
+        reference: data.m_payment_id,
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
+  }
 
   return new Response("ok", { status: 200 });
 }

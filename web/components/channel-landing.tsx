@@ -31,8 +31,8 @@ const HANDLING = [
     body: "Facebook, Instagram, Google and TikTok are launched and watched from the same dashboard, so you are not learning four different ad managers.",
   },
   {
-    title: "The AI writes the first draft",
-    body: "The AI Ad Launcher builds the campaign and drafts the ads, so the blank page is already filled in before you start editing.",
+    title: "You do not start from a blank page",
+    body: "The AI Ad Launcher helps build the campaign and write the advertising, so there is something to react to instead of an empty form.",
   },
   {
     title: "Leads land somewhere",
