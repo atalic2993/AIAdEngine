@@ -5,6 +5,8 @@ import { ButtonLink, Check, Container } from "@/components/ui";
 import { LogoLockup } from "@/components/brand";
 import { PLANS, isPlanId } from "@/lib/plans";
 import { PurchaseTracking } from "./purchase-tracking";
+import { hasDurableStore, wasRemembered } from "@/lib/idempotency";
+import { confirmationKey } from "@/lib/payfast";
 
 export const metadata: Metadata = {
   title: "Welcome to AI Ad Engine",
@@ -35,6 +37,12 @@ export default async function WelcomePage({ searchParams }: PageProps<"/welcome"
   const planParam = typeof query.plan === "string" ? query.plan : "";
   const reference = typeof query.ref === "string" ? query.ref : undefined;
   const plan = isPlanId(planParam) ? PLANS[planParam] : undefined;
+
+  // Ask our own records whether PayFast confirmed this payment, rather than
+  // believing the plan and reference sitting in the address bar.
+  const verifiable = hasDurableStore();
+  const confirmed =
+    verifiable && reference ? await wasRemembered(confirmationKey(reference)) : false;
 
   return (
     <>
@@ -94,9 +102,19 @@ export default async function WelcomePage({ searchParams }: PageProps<"/welcome"
               </ButtonLink>
             </div>
 
-            <p className="mt-6 text-sm text-muted-2">
-              A confirmation email is on its way to the address you used at checkout.
-            </p>
+            {plan ? (
+              <PurchaseTracking
+                value={plan.price}
+                contentName={plan.itemName}
+                eventId={reference}
+                confirmed={confirmed}
+                verifiable={verifiable}
+              />
+            ) : (
+              <p className="mt-6 text-sm text-muted-2">
+                A confirmation email is on its way to the address you used at checkout.
+              </p>
+            )}
           </Container>
         </section>
 
@@ -140,9 +158,7 @@ export default async function WelcomePage({ searchParams }: PageProps<"/welcome"
         </Container>
       </main>
 
-      {plan ? (
-        <PurchaseTracking value={plan.price} contentName={plan.itemName} eventId={reference} />
-      ) : null}
+
 
       <SiteFooter />
     </>

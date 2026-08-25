@@ -27,10 +27,13 @@ export function purchaseWebhookUrl(): string {
  * fields: plan, business name, mobile number, business address, and the niche
  * and website sharing the last one either side of a pipe.
  */
+export type PaymentKind = "first" | "renewal";
+
 export function purchasePayload(
   data: Record<string, string>,
   planName: string,
   amount: number,
+  kind: PaymentKind = "first",
 ): Record<string, unknown> {
   const first = (data.name_first ?? "").trim();
   const last = (data.name_last ?? "").trim();
@@ -38,7 +41,10 @@ export function purchasePayload(
   const mobile = parseSaMobile(data.custom_str3 ?? "");
 
   return {
-    event: "subscription_payment",
+    // A new customer and a monthly renewal are different things. Onboarding
+    // workflows in GoHighLevel should only listen for "subscription_payment".
+    event: kind === "renewal" ? "subscription_renewal" : "subscription_payment",
+    is_renewal: kind === "renewal",
     first_name: first,
     last_name: last,
     full_name: `${first} ${last}`.trim(),
@@ -73,7 +79,9 @@ export async function postToGhl(
   label: string,
 ): Promise<boolean> {
   if (!url) {
-    console.error(`[ghl:${label}] no webhook configured, payload not delivered`, payload);
+    console.error(`[ghl:${label}] no webhook configured, nothing delivered`, {
+      reference: payload.payment_reference,
+    });
     return false;
   }
 
@@ -85,14 +93,22 @@ export async function postToGhl(
     });
 
     if (!response.ok) {
-      console.error(`[ghl:${label}] webhook returned ${response.status}`, payload);
+      console.error(`[ghl:${label}] webhook returned ${response.status}`, {
+        reference: payload.payment_reference,
+      });
       return false;
     }
 
-    console.log(`[ghl:${label}] delivered`, { email: payload.email });
+    console.log(`[ghl:${label}] delivered`, { reference: payload.payment_reference });
     return true;
   } catch (error) {
-    console.error(`[ghl:${label}] webhook failed`, error, payload);
+    // The customer's details deliberately stay out of the log line: these logs
+    // are readable in the hosting dashboard and the payload is personal
+    // information under POPIA.
+    console.error(`[ghl:${label}] webhook failed`, {
+      reference: payload.payment_reference,
+      error: error instanceof Error ? error.message : String(error),
+    });
     return false;
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { trackConversion } from "@/lib/events";
 import type { Plan } from "@/lib/plans";
 import { SA_MOBILE_LENGTH, SA_MOBILE_PATTERN } from "@/lib/phone";
@@ -13,12 +13,36 @@ const labelClass = "mb-1.5 block text-[13px] text-muted";
 
 export function CheckoutForm({ plan }: { plan: Plan }) {
   const [submitting, setSubmitting] = useState(false);
+  /**
+   * A second click can land before React has re-rendered the disabled button,
+   * so the guard that actually stops a double submission is this ref, not the
+   * state. Two submissions would mean two PayFast references for one customer.
+   */
+  const sent = useRef(false);
+
+  useEffect(() => {
+    // Coming back with the browser's Back button can restore this page from the
+    // cache exactly as it was left: mid-submit, with the button disabled. Reset
+    // it so the form is usable again instead of dead.
+    function revive(event: PageTransitionEvent) {
+      if (!event.persisted) return;
+      sent.current = false;
+      setSubmitting(false);
+    }
+    window.addEventListener("pageshow", revive);
+    return () => window.removeEventListener("pageshow", revive);
+  }, []);
 
   return (
     <form
       method="POST"
       action="/api/payfast/create"
-      onSubmit={() => {
+      onSubmit={(event) => {
+        if (sent.current) {
+          event.preventDefault();
+          return;
+        }
+        sent.current = true;
         setSubmitting(true);
         trackConversion("InitiateCheckout", {
           value: plan.price,
@@ -208,7 +232,9 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
 
       <button
         type="submit"
-        className="inline-flex min-h-[50px] w-full touch-manipulation items-center justify-center gap-2.5 rounded-xl bg-brand px-6 text-[15px] font-semibold text-navy shadow-[0_1px_0_rgba(255,255,255,0.35)_inset,0_14px_36px_-16px_rgba(11,132,246,0.9)] transition-colors hover:bg-[#2f97ff] active:translate-y-px"
+        disabled={submitting}
+        aria-busy={submitting}
+        className="inline-flex min-h-[50px] w-full touch-manipulation items-center justify-center gap-2.5 rounded-xl bg-brand px-6 text-[15px] font-semibold text-navy shadow-[0_1px_0_rgba(255,255,255,0.35)_inset,0_14px_36px_-16px_rgba(11,132,246,0.9)] transition-colors hover:bg-[#2f97ff] active:translate-y-px disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-brand disabled:active:translate-y-0"
       >
         {submitting ? (
           <span
@@ -216,7 +242,7 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
             className="size-4 animate-spin rounded-full border-2 border-navy/30 border-t-navy"
           />
         ) : null}
-        Continue to PayFast
+        {submitting ? "Taking you to PayFast…" : "Continue to PayFast"}
       </button>
 
       <p aria-live="polite" className="sr-only">
