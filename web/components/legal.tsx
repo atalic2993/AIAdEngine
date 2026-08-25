@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Container } from "@/components/ui";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbSchema, graph, webPageSchema } from "@/lib/schema";
 
 export type LegalBlock = {
   heading?: string;
@@ -11,12 +13,17 @@ export type LegalBlock = {
 
 export function LegalPage({
   title,
+  path,
+  description,
   updated,
   intro,
   blocks,
   children,
 }: {
   title: string;
+  /** The page's own address, used for the trail search engines display. */
+  path: string;
+  description: string;
   updated: string;
   intro?: string[];
   blocks: LegalBlock[];
@@ -24,6 +31,15 @@ export function LegalPage({
 }) {
   return (
     <>
+      <JsonLd
+        data={graph(
+          webPageSchema({ path, name: title, description }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: title, path },
+          ]),
+        )}
+      />
       <SiteHeader />
       <main id="main">
         <Container className="py-14 sm:py-20">

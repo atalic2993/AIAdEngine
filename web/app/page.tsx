@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Hero } from "@/components/sections/hero";
@@ -10,11 +11,32 @@ import { Features } from "@/components/sections/features";
 import { Comparison } from "@/components/sections/comparison";
 import { CaseStudy } from "@/components/sections/case-study";
 import { Pricing } from "@/components/sections/pricing";
-import { ClosingCta, Faq } from "@/components/sections/faq";
+import { ClosingCta, Faq, FAQ_ENTRIES } from "@/components/sections/faq";
+import { JsonLd } from "@/components/json-ld";
+import { faqSchema, graph, softwareSchema, webPageSchema } from "@/lib/schema";
+import { SITE_URL } from "@/lib/site";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   return (
     <>
+      {/* The product and its two prices in Rands, plus the questions already
+          answered further down the page, in the form search engines read. */}
+      <JsonLd
+        data={graph(
+          webPageSchema({
+            path: "/",
+            name: "AI Ad Software for South African Businesses",
+            description:
+              "Launch and manage advertising across Facebook, Instagram, Google and TikTok from one AI-powered platform, priced in Rands and billed month-to-month.",
+          }),
+          softwareSchema(),
+          faqSchema(FAQ_ENTRIES, `${SITE_URL}/`),
+        )}
+      />
       <SiteHeader />
       <main id="main">
         <Hero />

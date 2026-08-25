@@ -2,7 +2,12 @@ import Link from "next/link";
 import { ButtonLink, Container, Section } from "@/components/ui";
 import { DELIVERY_PROMISE } from "@/lib/business";
 
-const FAQS: Array<{ q: string; a: React.ReactNode }> = [
+/**
+ * "plain" is the same answer as flat text. The visible page can use a link or
+ * any other markup; the structured data needs a plain sentence, and keeping
+ * both here means they can never say two different things.
+ */
+const FAQS: Array<{ q: string; a: React.ReactNode; plain?: string }> = [
   {
     q: "What is AI Ad Engine?",
     a: "AI Ad Engine is an AI-powered advertising platform designed to help businesses create, launch and manage digital advertising more easily.",
@@ -38,6 +43,7 @@ const FAQS: Array<{ q: string; a: React.ReactNode }> = [
         .
       </>
     ),
+    plain: "Yes, subject to our Refund & Cancellation Policy.",
   },
   {
     q: "Does AI Ad Engine guarantee leads or sales?",
@@ -48,6 +54,12 @@ const FAQS: Array<{ q: string; a: React.ReactNode }> = [
     a: "Scale is primarily our self-service option. Dominate includes additional Done-With-You campaign assistance, onboarding and support.",
   },
 ];
+
+/** The same questions and answers as flat text, for the FAQ structured data. */
+export const FAQ_ENTRIES = FAQS.map((faq) => ({
+  question: faq.q,
+  answer: faq.plain ?? (typeof faq.a === "string" ? faq.a : ""),
+})).filter((entry) => entry.answer.length > 0);
 
 export function Faq() {
   return (

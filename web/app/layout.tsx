@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Archivo, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@/components/analytics";
 import { BrandDefs } from "@/components/logos";
+import { JsonLd } from "@/components/json-ld";
+import { graph, organisationSchema, websiteSchema } from "@/lib/schema";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -24,20 +27,21 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aiadengine.co.za";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
+  // Kept under about sixty characters so Google shows the whole line instead of
+  // cutting it off, and led by what people actually search for rather than by
+  // the brand name.
   title: {
-    default: "AI Ad Engine — Facebook, Instagram, Google & TikTok ads, powered by AI",
-    template: "%s — AI Ad Engine",
+    default: "AI Ad Software for South African Businesses | AI Ad Engine",
+    template: "%s | AI Ad Engine",
   },
   description:
     "Launch and manage advertising across Facebook, Instagram, Google and TikTok from one AI-powered platform. Built for South African businesses. From R599/month, month-to-month.",
   openGraph: {
     type: "website",
     locale: "en_ZA",
-    url: siteUrl,
+    url: SITE_URL,
     siteName: "AI Ad Engine",
     title: "Stop boosting posts. Start running ads that grow your business.",
     description:
@@ -46,7 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Ad Engine — smarter ads, bigger results",
+    title: "AI Ad Engine: smarter ads, bigger results",
     description:
       "Facebook, Instagram, Google and TikTok ads from one AI-powered platform. From R599/month.",
     images: ["/og.jpg"],
@@ -73,6 +77,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <BrandDefs />
+        {/* Who this company is and which site this is. Every page inherits it. */}
+        <JsonLd data={graph(organisationSchema(), websiteSchema())} />
         {children}
         <Analytics />
       </body>

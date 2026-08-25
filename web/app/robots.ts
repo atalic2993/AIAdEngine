@@ -13,7 +13,13 @@ export default function robots(): MetadataRoute.Robots {
   }
 
   return {
-    rules: { userAgent: "*", allow: "/", disallow: ["/checkout/", "/welcome", "/api/"] },
+    // Checkout and the welcome page are deliberately NOT blocked here. Both
+    // already carry a "noindex" instruction, and a search engine has to be
+    // allowed to fetch a page before it can read that instruction. Blocking
+    // them here would leave Google able to list the bare address without ever
+    // learning it was meant to stay out. Only the API, which has nothing to
+    // read, is blocked outright.
+    rules: { userAgent: "*", allow: "/", disallow: ["/api/"] },
     sitemap: `${site}/sitemap.xml`,
   };
 }
