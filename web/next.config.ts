@@ -53,8 +53,22 @@ const ALLOWED = {
   ],
   /** The GoHighLevel booking calendar is embedded on /book-a-demo. */
   frames: ["https://*.leadconnectorhq.com", "https://*.msgsndr.com"],
-  /** Checkout posts the customer to PayFast, so that form target must be allowed. */
-  forms: ["https://www.payfast.co.za", "https://sandbox.payfast.co.za"],
+  /**
+   * Checkout posts the customer to PayFast, so that form target must be allowed.
+   *
+   * The browser checks every hop of that submission, not just the first one, and
+   * PayFast does not keep the customer on the address we post to: live payments
+   * are handed straight on to payment.payfast.io. Listing only the address we
+   * post to means the browser blocks the handover and the customer sits on
+   * "Taking you to PayFast…" forever. Both PayFast domains are allowed in full
+   * so a future hop of theirs cannot break checkout again.
+   */
+  forms: [
+    "https://payfast.co.za",
+    "https://*.payfast.co.za",
+    "https://payfast.io",
+    "https://*.payfast.io",
+  ],
 };
 
 /**
