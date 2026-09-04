@@ -139,7 +139,7 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
               aria-label="Country"
               value={country}
               onChange={(event) => setCountry(event.target.value)}
-              className={`${field} w-[92px] shrink-0 pr-1`}
+              className="min-h-[44px] w-[92px] shrink-0 rounded-xl border border-line bg-navy/45 px-2 text-[16px] text-ink transition-colors focus:border-brand/60"
             >
               {SUPPORTED_COUNTRIES.map((option) => (
                 <option key={option.code} value={option.code}>
