@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { trackConversion } from "@/lib/events";
 import type { Plan } from "@/lib/plans";
-import { SA_MOBILE_LENGTH, SA_MOBILE_PATTERN } from "@/lib/phone";
+import { DEFAULT_COUNTRY, SUPPORTED_COUNTRIES, countryByCode, parsePhoneForCountry } from "@/lib/phone";
 
 const field =
   "min-h-[44px] w-full rounded-xl border border-line bg-navy/45 px-3.5 text-[16px] text-ink placeholder:text-muted-2 transition-colors focus:border-brand/60";
@@ -20,6 +20,11 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
    */
   const sent = useRef(false);
   const [stalled, setStalled] = useState(false);
+  const [country, setCountry] = useState<string>(DEFAULT_COUNTRY);
+  const [phoneValue, setPhoneValue] = useState("");
+  const [phoneTouched, setPhoneTouched] = useState(false);
+  const phoneValid = phoneValue.trim() === "" || parsePhoneForCountry(country, phoneValue) !== null;
+  const selectedCountry = countryByCode(country);
 
   useEffect(() => {
     // Coming back with the browser's Back button can restore this page from the
@@ -55,6 +60,11 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
       onSubmit={(event) => {
         if (sent.current) {
           event.preventDefault();
+          return;
+        }
+        if (!parsePhoneForCountry(country, phoneValue)) {
+          event.preventDefault();
+          setPhoneTouched(true);
           return;
         }
         sent.current = true;
@@ -120,23 +130,48 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
           />
         </div>
         <div>
-          <label htmlFor="cell_number" className={labelClass}>
-            Mobile number <span className="text-muted-2">(SA, 10 digits)</span>
+          <label htmlFor="cell_number_national" className={labelClass}>
+            Mobile number
           </label>
-          <input
-            id="cell_number"
-            name="cell_number"
-            type="tel"
-            required
-            autoComplete="tel"
-            inputMode="numeric"
-            spellCheck={false}
-            pattern={SA_MOBILE_PATTERN}
-            maxLength={SA_MOBILE_LENGTH}
-            title="Ten digits, starting 06, 07 or 08. No spaces and no +27. Example: 0821234567"
-            placeholder="0821234567"
-            className={field}
-          />
+          <input type="hidden" name="cell_country" value={country} />
+          <div className="flex gap-2">
+            <select
+              aria-label="Country"
+              value={country}
+              onChange={(event) => setCountry(event.target.value)}
+              className={`${field} w-[92px] shrink-0 pr-1`}
+            >
+              {SUPPORTED_COUNTRIES.map((option) => (
+                <option key={option.code} value={option.code}>
+                  {option.flag} {option.dialCode}
+                </option>
+              ))}
+            </select>
+            <input
+              id="cell_number_national"
+              name="cell_number_national"
+              type="tel"
+              required
+              autoComplete="tel-national"
+              inputMode="tel"
+              spellCheck={false}
+              value={phoneValue}
+              onChange={(event) => setPhoneValue(event.target.value)}
+              onBlur={() => setPhoneTouched(true)}
+              aria-invalid={phoneTouched && !phoneValid}
+              title={`Enter a valid ${selectedCountry?.name ?? ""} mobile number.`}
+              placeholder={selectedCountry?.example}
+              className={`${field} flex-1`}
+            />
+          </div>
+          <p
+            aria-live="polite"
+            className={phoneTouched && !phoneValid ? "mt-1 text-[12px] text-warn" : "sr-only"}
+          >
+            {phoneTouched && !phoneValid
+              ? `Enter a valid ${selectedCountry?.name ?? "mobile"} number, e.g. ${selectedCountry?.example}.`
+              : ""}
+          </p>
         </div>
       </div>
 

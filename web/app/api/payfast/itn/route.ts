@@ -97,9 +97,34 @@ export async function POST(request: Request) {
   const signatureOk = signaturesMatch(expected, data.signature ?? "");
   const payfastOk = await verifyWithPayfast(raw, config.validateUrl);
 
+  // TEMPORARY, remove once PayFast confirms how Multi-Currency Pricing (MCP)
+  // reports amounts on the ITN: log every field name PayFast actually sent,
+  // minus anything personal, so a sandbox MCP test can show whether a
+  // currency field exists and whether amount_gross stays in ZAR for a
+  // non-ZAR buyer. PII fields (name/email/phone/address/business) are
+  // stripped before logging.
+  const piiFields = new Set([
+    "name_first",
+    "name_last",
+    "email_address",
+    "custom_str2",
+    "custom_str3",
+    "custom_str4",
+    "custom_str5",
+    "token",
+  ]);
+  console.log(
+    "[payfast:itn:debug] raw fields received",
+    Object.fromEntries(entries.filter(([key]) => !piiFields.has(key))),
+  );
+
   const planId = data.custom_str1 ?? "";
   const plan = isPlanId(planId) ? PLANS[planId] : undefined;
   const grossAmount = Number.parseFloat(data.amount_gross ?? "0");
+  // This assumes amount_gross is always ZAR. If Multi-Currency Pricing makes
+  // PayFast report the buyer's converted currency/amount instead, this check
+  // will reject every non-ZAR payment as a mismatch. Do not change this until
+  // a real MCP test (see the debug log above) confirms which way it behaves.
   const amountOk = plan ? Math.abs(grossAmount - plan.price) < 0.01 : false;
   const merchantOk = !config.merchantId || data.merchant_id === config.merchantId;
 

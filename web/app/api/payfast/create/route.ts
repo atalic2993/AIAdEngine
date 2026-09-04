@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { PLANS, isPlanId } from "@/lib/plans";
 import { compactFields, money, payfastConfig, signatureFor, type PayfastFields } from "@/lib/payfast";
-import { parseSaMobile } from "@/lib/phone";
+import { parsePhoneForCountry } from "@/lib/phone";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -50,10 +50,11 @@ export async function POST(request: Request) {
   const firstName = String(form.get("name_first") ?? "").trim().slice(0, 100);
   const lastName = String(form.get("name_last") ?? "").trim().slice(0, 100);
   const email = String(form.get("email_address") ?? "").trim().slice(0, 100);
-  // Rejected outright if it is not a South African mobile number, and stored in
-  // the ten-digit form PayFast expects.
-  const mobile = parseSaMobile(String(form.get("cell_number") ?? ""));
-  const cell = mobile?.local ?? "";
+  // Rejected outright if it does not match a real number for the country the
+  // customer selected.
+  const cellCountry = String(form.get("cell_country") ?? "").trim();
+  const cellNational = String(form.get("cell_number_national") ?? "").trim();
+  const phone = parsePhoneForCountry(cellCountry, cellNational);
   const business = String(form.get("business_name") ?? "").trim().slice(0, 200);
   const address = String(form.get("business_address") ?? "").trim().slice(0, 250);
   // These two share one custom field, so each half is capped to stay inside
@@ -67,7 +68,7 @@ export async function POST(request: Request) {
     !firstName ||
     !lastName ||
     !email ||
-    !cell ||
+    !phone ||
     !business ||
     !address ||
     !niche ||
@@ -94,7 +95,9 @@ export async function POST(request: Request) {
     // These are what reach GoHighLevel once the payment is confirmed.
     custom_str1: planId,
     custom_str2: business,
-    custom_str3: cell,
+    // E.164 (e.g. +14155552671), so the country travels with the number
+    // wherever this field is read back — PayFast's ITN, then GoHighLevel.
+    custom_str3: phone.e164,
     custom_str4: address,
     // Only five custom fields exist, so the last two share one, split on a pipe.
     custom_str5: `${niche}|${website}`,
@@ -107,7 +110,13 @@ export async function POST(request: Request) {
     cycles: "0", // until cancelled
   };
 
-  draft.cell_number = cell;
+  // PayFast's own cell_number field is only documented and tested against SA
+  // mobile numbers. It's optional (compactFields drops it when absent), so it
+  // is only sent for South African customers; everyone else's number still
+  // reaches GoHighLevel via custom_str3 above.
+  if (phone.country === "ZA") {
+    draft.cell_number = phone.national;
+  }
 
   const fields = compactFields(draft);
   const signature = signatureFor(fields, config.passphrase);

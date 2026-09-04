@@ -1,4 +1,4 @@
-import { parseSaMobile } from "@/lib/phone";
+import { parsePhoneE164 } from "@/lib/phone";
 
 /**
  * GoHighLevel webhook.
@@ -38,7 +38,7 @@ export function purchasePayload(
   const first = (data.name_first ?? "").trim();
   const last = (data.name_last ?? "").trim();
   const [niche = "", website = ""] = (data.custom_str5 ?? "").split("|");
-  const mobile = parseSaMobile(data.custom_str3 ?? "");
+  const mobile = parsePhoneE164(data.custom_str3 ?? "");
 
   return {
     // A new customer and a monthly renewal are different things. Onboarding
@@ -50,9 +50,11 @@ export function purchasePayload(
     full_name: `${first} ${last}`.trim(),
     email: (data.email_address ?? "").trim().toLowerCase(),
     // GoHighLevel sends SMS off the international format, so that is the main
-    // field. The local form is included for anyone reading the record.
+    // field. The local form and the country are included for anyone reading
+    // the record or building country-specific workflows.
     phone: mobile?.e164 ?? (data.custom_str3 ?? "").trim(),
-    phone_local: mobile?.local ?? (data.custom_str3 ?? "").trim(),
+    phone_local: mobile?.national ?? (data.custom_str3 ?? "").trim(),
+    phone_country: mobile?.country ?? "",
     business_name: (data.custom_str2 ?? "").trim(),
     business_address: (data.custom_str4 ?? "").trim(),
     business_niche: niche.trim(),
