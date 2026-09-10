@@ -136,6 +136,9 @@ export function Hero() {
           >
             <span className="eyebrow hidden sm:inline">Reported SA result</span>
             <span className="tnum text-[12.5px] text-ink sm:text-sm">
+              <span className="block font-mono text-[9px] uppercase leading-none tracking-[0.12em] text-muted sm:hidden">
+                Reported
+              </span>
               R4K<span className="text-muted-2">/mo</span>
               <span aria-hidden="true" className="mx-1.5 text-brand-2">
                 →

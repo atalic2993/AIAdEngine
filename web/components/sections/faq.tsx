@@ -27,7 +27,7 @@ const FAQS: Array<{ q: string; a: React.ReactNode; plain?: string }> = [
   },
   {
     q: "Is a CRM included?",
-    a: "Yes. Both plans include a CRM, which keeps customer details and enquiries together, plus a sales pipeline for tracking opportunities from enquiry towards a sale. Your team still needs to follow up with customers.",
+    a: "Yes. Both plans include a CRM, which keeps customer details, enquiries and conversations organised in one place, plus a sales pipeline for tracking opportunities from enquiry towards a sale. Your team still needs to follow up with customers.",
   },
   {
     q: "What does the AI do, and what do I control?",

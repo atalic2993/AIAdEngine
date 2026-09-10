@@ -13,7 +13,7 @@ export function CaseStudy() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
           {/* The number, told as a before and after. */}
-          <div className="rounded-card border border-brand/35 bg-brand-soft p-6 sm:p-8">
+          <div className="min-w-0 rounded-card border border-brand/35 bg-brand-soft p-6 sm:p-8">
             <div className="flex items-center gap-3">
               <Image
                 src="/polvytjie-logo-96.png"
@@ -32,11 +32,11 @@ export function CaseStudy() {
               </div>
             </div>
 
-            <dl className="mt-8 grid grid-cols-[1fr_auto_1fr] items-end gap-3">
+            <dl className="mt-8 grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-end gap-3">
               <div>
                 <dt className="eyebrow">Reported before</dt>
                 <dd className="display tnum mt-2 text-[clamp(1.5rem,4.5vw,2.25rem)] text-muted">
-                  R4K<span className="text-base text-muted-2">/mo</span>
+                  R4K<span className="block text-base text-muted-2 sm:inline">/mo</span>
                 </dd>
                 <div
                   aria-hidden="true"
@@ -49,7 +49,7 @@ export function CaseStudy() {
               <div>
                 <dt className="eyebrow">Reported after</dt>
                 <dd className="display tnum mt-2 text-[clamp(1.75rem,5.5vw,2.75rem)] text-brand-2">
-                  R165K+<span className="text-base text-brand/70">/mo</span>
+                  R165K+<span className="block text-base text-brand/70 sm:inline">/mo</span>
                 </dd>
                 <div
                   aria-hidden="true"
@@ -64,7 +64,7 @@ export function CaseStudy() {
           </div>
 
           {/* Verify it yourself. */}
-          <div className="rounded-card border border-line bg-navy-2/70 p-6 sm:p-8">
+          <div className="min-w-0 rounded-card border border-line bg-navy-2/70 p-6 sm:p-8">
             <h3 className="display text-xl uppercase">Speak to a customer reference.</h3>
             <p className="mt-4 text-[15px] leading-relaxed text-muted">
               Visit the store or contact Polvytjie directly to ask about their experience.
