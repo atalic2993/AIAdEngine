@@ -27,20 +27,20 @@ export function channelMetadata(channel: Channel): Metadata {
 /** What the platform does with this channel, in the site's existing terms. */
 const HANDLING = [
   {
-    title: "One login instead of three",
-    body: "Facebook, Instagram, Google and TikTok are launched and watched from the same dashboard, so you are not learning four different ad managers.",
+    title: "Build with guidance",
+    body: "Start with your offer and customer, then use AI assistance to shape the campaign and copy.",
   },
   {
-    title: "You do not start from a blank page",
-    body: "The AI Ad Launcher helps build the campaign and write the advertising, so there is something to react to instead of an empty form.",
+    title: "Manage from one place",
+    body: "Keep this channel alongside your other advertising instead of opening another disconnected dashboard.",
   },
   {
-    title: "Leads land somewhere",
-    body: "A CRM, pipeline tracking and lead management are included, so an enquiry from an ad becomes a record you can follow up rather than a notification you miss.",
+    title: "Track every enquiry",
+    body: "New leads enter the CRM, where conversations and next steps stay organised.",
   },
   {
-    title: "You can see what happened",
-    body: "Campaign reporting in one dashboard, in Rands, so spend and results sit next to each other.",
+    title: "Follow performance through",
+    body: "See spend, enquiries and pipeline movement together, not only clicks and impressions.",
   },
 ];
 
@@ -81,17 +81,17 @@ export function ChannelLanding({ channel }: { channel: Channel }) {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink href="/#pricing" size="lg">
-                  See pricing
+                  View plans
                 </ButtonLink>
                 <ButtonLink href="/book-a-demo" size="lg" variant="ghost">
-                  Book a demo
+                  Book a 15-minute demo
                 </ButtonLink>
               </div>
 
               <p className="mt-6 flex flex-wrap items-baseline gap-x-2.5 text-sm text-muted">
                 <span className="eyebrow">From</span>
                 <span className="display tnum text-2xl text-ink">R599</span>
-                <span>per month · priced in Rands · cancel anytime</span>
+                <span>per month · priced in Rands · month-to-month</span>
               </p>
             </div>
           </Container>
