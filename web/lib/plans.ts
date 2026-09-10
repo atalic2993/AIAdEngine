@@ -60,7 +60,7 @@ export const PLANS: Record<PlanId, Plan> = {
       "Additional marketing guidance",
     ],
     featured: true,
-    badge: "Most popular",
+    badge: "Hands-on help",
     itemName: "AI Ad Engine Dominate plan",
     itemDescription:
       "AI Ad Engine Dominate plan. Monthly subscription. Advertising spend not included.",

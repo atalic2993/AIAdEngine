@@ -44,9 +44,9 @@ export const CHANNELS: Channel[] = [
     eyebrow: "Facebook and Instagram",
     h1: "Facebook and Instagram ads, without living in Ads Manager.",
     standfirst:
-      "Facebook and Instagram share Meta's advertising system, so one campaign can appear across both. The setup offers detailed choices for audiences, placements and delivery, which is useful but easy to overcomplicate.",
+      "Facebook and Instagram use Meta’s advertising system. Run one campaign across both, with control over who sees your ads and where they appear.",
     intent:
-      "Meta ads can introduce your offer to people while they scroll, before they search for it. Start with the customer, service area and offer, then test the message and creative against the enquiries that reach your CRM.",
+      "Meta ads can introduce your offer to people while they scroll, before they search for it. Start with the customer, service area and offer, then test the message and creative against the enquiries in your CRM customer records.",
     placements: [
       {
         name: "Facebook Feed",
@@ -162,7 +162,7 @@ export const CHANNELS: Channel[] = [
       },
       {
         title: "Reporting is not the same as understanding",
-        body: "Clicks and impressions show activity. Connecting enquiries to the CRM and pipeline shows whether that activity produced a useful next step.",
+        body: "Clicks and ad views show activity. Customer records in the CRM and follow-up stages in the sales pipeline show what happens after each enquiry.",
       },
     ],
     suits: [
@@ -210,7 +210,7 @@ export const CHANNELS: Channel[] = [
     standfirst:
       "TikTok places short vertical video in the feed people already watch. For a South African business, the question is whether the offer can be shown clearly in a format that feels at home there.",
     intent:
-      "Delivery responds to signals such as watch time and engagement as well as your campaign settings. Give people a clear reason to keep watching, then judge the channel by the enquiries or online sales it adds to the pipeline.",
+      "Delivery responds to signals such as watch time and engagement as well as your campaign settings. Give people a clear reason to keep watching, then judge the channel by the enquiries or online sales it produces.",
     placements: [
       {
         name: "In-feed video",

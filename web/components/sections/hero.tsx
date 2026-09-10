@@ -40,7 +40,7 @@ export function Hero() {
             </h1>
 
             <p className="hero-sub mx-auto mt-2 max-w-xl text-[14px] leading-snug text-muted max-[380px]:mt-1 sm:mt-4 sm:text-[17px] sm:leading-relaxed lg:mx-0">
-              Plan, launch and manage advertising across Facebook, Instagram, Google and TikTok—then track every enquiry in one connected CRM and sales pipeline.
+              Plan, launch and manage ads across Facebook, Instagram, Google and TikTok. Keep customer records in the CRM and track each enquiry through follow-up stages in the sales pipeline.
             </p>
 
             <ul className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-0 sm:mt-4 sm:gap-x-5 sm:gap-y-1 lg:justify-start">

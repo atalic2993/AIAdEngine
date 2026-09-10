@@ -40,7 +40,7 @@ const HANDLING = [
   },
   {
     title: "Follow performance through",
-    body: "See spend, enquiries and pipeline movement together, not only clicks and impressions.",
+    body: "See spend, enquiries and each lead’s progress towards a sale together.",
   },
 ];
 
