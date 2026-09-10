@@ -3,7 +3,11 @@ import { ButtonLink, Container } from "@/components/ui";
 import { HeroConsole, HeroConsoleCompact } from "@/components/mockups";
 import { FacebookMark, GoogleMark, InstagramMark, TikTokMark } from "@/components/logos";
 
-const NOTS = ["No complicated Ads Manager", "No agency retainers", "No long-term contracts"];
+const TRUST_POINTS = [
+  "Four major advertising platforms",
+  "CRM and sales pipeline included",
+  "Real human support when needed",
+];
 
 const CHANNELS = [
   { name: "Facebook", Mark: FacebookMark, tint: "text-[#0866FF]" },
@@ -20,7 +24,7 @@ export function Hero() {
       <div className="rule-grid pointer-events-none absolute inset-0" aria-hidden="true" />
 
       <Container className="hero-stage relative hero-pad flex flex-1 items-center">
-        <div className="hero-gap grid w-full items-center gap-5 sm:gap-8 md:gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,1fr)] lg:gap-12">
+        <div className="hero-gap grid w-full items-center gap-3 sm:gap-4 md:gap-4 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,1fr)] lg:gap-12">
           <div className="text-center lg:text-left">
             <p className="glass inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 sm:gap-2.5 sm:px-3.5 sm:py-1.5">
               <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-2" />
@@ -29,18 +33,18 @@ export function Hero() {
               </span>
             </p>
 
-            <h1 className="display hero-title mt-3 uppercase sm:mt-5">
-              <span className="chrome-text">Stop boosting posts.</span>
+            <h1 className="display hero-title mt-2 uppercase max-[380px]:mt-1 sm:mt-4">
+              <span className="chrome-text">Run your ads.</span>
               <br />
-              <span className="text-electric">Start running ads that grow your business.</span>
+              <span className="text-electric">Keep every lead in sight.</span>
             </h1>
 
-            <p className="hero-sub mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-muted sm:mt-5 sm:text-[17px] lg:mx-0">
-              Launch smarter ads across Facebook, Instagram, Google and TikTok — powered by AI.
+            <p className="hero-sub mx-auto mt-2 max-w-xl text-[14px] leading-snug text-muted max-[380px]:mt-1 sm:mt-4 sm:text-[17px] sm:leading-relaxed lg:mx-0">
+              Plan, launch and manage ads across Facebook, Instagram, Google and TikTok. Keep customer records in the CRM and track each enquiry through follow-up stages in the sales pipeline.
             </p>
 
-            <ul className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 sm:mt-5 sm:gap-x-5 lg:justify-start">
-              {NOTS.map((line) => (
+            <ul className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-0 sm:mt-4 sm:gap-x-5 sm:gap-y-1 lg:justify-start">
+              {TRUST_POINTS.map((line) => (
                 <li key={line} className="flex items-center gap-1.5 text-[12.5px] text-chrome sm:gap-2 sm:text-[14px]">
                   <svg
                     viewBox="0 0 16 16"
@@ -61,31 +65,34 @@ export function Hero() {
               ))}
             </ul>
 
-            <div className="mt-4 flex items-center gap-2.5 sm:mt-7 sm:justify-center sm:gap-3 lg:justify-start">
+            <div className="mt-3 flex items-center gap-2.5 max-[380px]:mt-2 sm:mt-6 sm:justify-center sm:gap-3 lg:justify-start">
               <ButtonLink
                 href="/#pricing"
                 size="md"
                 className="flex-1 sm:flex-none sm:min-h-[52px] sm:px-6 sm:text-[15px]"
               >
-                Get started
+                Choose your plan
               </ButtonLink>
               <ButtonLink
-                href="/#how-it-works"
+                href="/book-a-demo"
                 variant="ghost"
                 size="md"
                 className="flex-1 sm:flex-none sm:min-h-[52px] sm:px-6 sm:text-[15px]"
               >
-                See how it works
+                Book a 15-minute demo
               </ButtonLink>
             </div>
 
-            <p className="mt-3 flex flex-wrap items-baseline justify-center gap-x-2 gap-y-0.5 text-[13px] text-muted sm:mt-5 sm:gap-x-2.5 sm:text-sm lg:justify-start">
+            <p className="mt-2 flex flex-wrap items-baseline justify-center gap-x-2 gap-y-0.5 text-[13px] text-muted max-[380px]:mt-1 sm:mt-4 sm:gap-x-2.5 sm:text-sm lg:justify-start">
               <span className="eyebrow">From</span>
-              <span className="display tnum text-xl text-ink sm:text-2xl">R599</span>
+              <span className="display tnum text-xl text-ink sm:text-2xl">
+                R599<span className="text-xs text-muted sm:text-sm">/month</span>
+              </span>
               <span>
-                per month<span className="hero-drop"> · priced in Rands</span> · cancel anytime
+                Rands · month-to-month
               </span>
             </p>
+            <p className="mt-1 text-xs text-muted-2">Advertising spend is separate.</p>
           </div>
 
           {/* The product, on a lit stage. */}
@@ -100,7 +107,7 @@ export function Hero() {
                 </div>
               </div>
             </div>
-            <p className="hero-note mt-2 text-center text-[10px] text-muted-2 sm:mt-4 sm:text-[11px] lg:text-right">
+            <p className="hero-note mt-1 text-center text-[10px] text-muted-2 sm:mt-2 sm:text-[11px] lg:text-right">
               Interface illustration. Example figures, not a performance promise.
             </p>
           </div>
@@ -110,7 +117,7 @@ export function Hero() {
       {/* Proof strip closes the hero: what it runs on, and one real result. */}
       <Container className="relative">
         <div className="hairline-x h-px w-full" aria-hidden="true" />
-        <div className="flex items-center justify-between gap-3 py-2.5 sm:gap-4 sm:py-4">
+        <div className="flex items-center justify-between gap-3 py-1.5 sm:gap-4 sm:py-4">
           <div className="flex items-center gap-2.5 sm:gap-4">
             <span className="eyebrow hidden shrink-0 sm:inline">Runs on</span>
             <span
@@ -127,8 +134,11 @@ export function Hero() {
             href="/#results"
             className="glass flex min-h-[44px] items-center gap-2 rounded-full border border-line px-3 transition-colors hover:border-line-strong sm:gap-3 sm:px-4"
           >
-            <span className="eyebrow hidden sm:inline">Real SA result</span>
+            <span className="eyebrow hidden sm:inline">Reported SA result</span>
             <span className="tnum text-[12.5px] text-ink sm:text-sm">
+              <span className="block font-mono text-[9px] uppercase leading-none tracking-[0.12em] text-muted sm:hidden">
+                Reported
+              </span>
               R4K<span className="text-muted-2">/mo</span>
               <span aria-hidden="true" className="mx-1.5 text-brand-2">
                 →
@@ -136,7 +146,7 @@ export function Hero() {
               R165K+<span className="text-muted-2">/mo</span>
             </span>
             <span className="hidden font-mono text-[11px] uppercase tracking-[0.16em] text-brand-2 sm:inline">
-              See how
+              View result
             </span>
           </Link>
         </div>

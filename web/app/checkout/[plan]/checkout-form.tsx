@@ -308,8 +308,9 @@ export function CheckoutForm({ plan }: { plan: Plan }) {
       </p>
 
       <p className="text-center text-[11px] text-muted-2">
-        Card details are entered on PayFast, never on this site. Every field is used to build your
-        advertising account.
+        Card details are entered on PayFast. We use your business and contact details to prepare
+        your AI Ad Engine account and contact you about setup. You connect your advertising
+        accounts after receiving your login.
       </p>
     </form>
   );

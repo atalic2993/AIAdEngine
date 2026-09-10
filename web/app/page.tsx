@@ -29,9 +29,9 @@ export default function HomePage() {
         data={graph(
           webPageSchema({
             path: "/",
-            name: "AI Ad Software for South African Businesses",
+            name: "Advertising and Lead Management for South African Businesses",
             description:
-              "Launch and manage advertising across Facebook, Instagram, Google and TikTok from one AI-powered platform, priced in Rands and billed month-to-month.",
+              "Plan and manage advertising across four major platforms, then track every enquiry in one connected CRM and sales pipeline. Priced in Rands, month-to-month.",
           }),
           softwareSchema(),
           faqSchema(FAQ_ENTRIES, `${SITE_URL}/`),

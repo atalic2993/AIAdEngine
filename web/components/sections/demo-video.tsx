@@ -16,12 +16,13 @@ export function VideoSlot() {
     <Section id="demo" className="border-b border-line">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <p className="eyebrow">Walkthrough</p>
+          <p className="eyebrow">See the platform</p>
           <h2 className="display mt-4 text-[clamp(1.9rem,5vw,3.1rem)] uppercase">
-            See AI Ad Engine in action.
+            See how the workspace fits your business.
           </h2>
           <p className="mt-4 text-[16px] text-muted">
-            A screen recording of the platform, start to finish. Just under two minutes, with sound.
+            Watch the platform walkthrough, with sound. For a closer look at your business needs,
+            book a 15-minute demo.
           </p>
         </div>
 

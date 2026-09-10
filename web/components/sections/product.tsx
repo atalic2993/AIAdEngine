@@ -1,26 +1,26 @@
 import { Container, Section, VisualNote } from "@/components/ui";
-import { AIPanel, CampaignBuilder, ChannelBoard, ReportingBoard } from "@/components/mockups";
+import { AIPanel, ChannelBoard, HeroConsole, ReportingBoard } from "@/components/mockups";
 
 const BLOCKS = [
   {
-    title: "Launch ads without becoming an ads expert.",
-    body: "Pick what you want more of, set a daily budget in Rands, choose where your customers are. AI Ad Engine handles the parts that normally send people to YouTube tutorials.",
-    Visual: CampaignBuilder,
-  },
-  {
-    title: "Facebook. Instagram. Google. TikTok.",
-    body: "Connect the advertising accounts you already have, or create new ones, and run all of them from a single screen instead of four different dashboards.",
+    title: "Bring every channel into one workspace.",
+    body: "Connect your advertising accounts and manage campaigns together. See where your budget is going without moving between separate dashboards.",
     Visual: ChannelBoard,
   },
   {
-    title: "Let AI do the heavy lifting.",
-    body: "Describe your business in your own words. AI Ad Engine helps build the campaign, suggest who to target and write ad copy you can edit, approve or rewrite.",
+    title: "Build campaigns with AI assistance.",
+    body: "Start with your business brief. Get guided campaign creation, suggested advertising copy and creative direction, then review the details before you approve and launch.",
     Visual: AIPanel,
   },
   {
-    title: "Know what is working.",
-    body: "Spend, leads, cost per lead and the campaigns behind them, in plain language. No exported spreadsheets and no waiting for an agency report.",
+    title: "See what happens after the click.",
+    body: "Read spend, enquiries and cost per lead in plain language. Use campaign reports alongside customer records to understand where to focus your attention next.",
     Visual: ReportingBoard,
+  },
+  {
+    title: "Keep follow-up moving.",
+    body: "The included CRM keeps customer records together. Use the sales pipeline to track each enquiry towards a sale, so you can see who needs the next conversation. Human support is available, with hands-on campaign help on Dominate.",
+    Visual: HeroConsole,
   },
 ];
 
@@ -30,7 +30,7 @@ export function Product() {
       <Container>
         <p className="eyebrow">The platform</p>
         <h2 className="display mt-4 max-w-2xl text-[clamp(1.9rem,5vw,3.1rem)] uppercase">
-          This is what you are actually buying.
+          Advertising and follow-up, connected.
         </h2>
 
         <div className="mt-14 space-y-16 sm:space-y-24">

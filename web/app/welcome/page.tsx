@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { ButtonLink, Check, Container } from "@/components/ui";
 import { LogoLockup } from "@/components/brand";
 import { PLANS, isPlanId } from "@/lib/plans";
+import { DELIVERY_PROMISE } from "@/lib/business";
 import { PurchaseTracking } from "./purchase-tracking";
 import { hasDurableStore, wasRemembered } from "@/lib/idempotency";
 import { confirmationKey } from "@/lib/payfast";
@@ -15,20 +16,24 @@ export const metadata: Metadata = {
 
 const STEPS = [
   {
-    title: "Check your inbox",
-    body: "Your payment confirmation is on its way to the email address you used at checkout. If it is not there in a few minutes, check spam.",
+    title: "Payment confirmation",
+    body: "Your confirmation email is your receipt. Check the email address you used at checkout, including the spam folder. Payment confirmation is separate from your account login.",
   },
   {
-    title: "We build your account",
-    body: "Using the details you gave us at checkout, our team sets up your own AI Ad Engine account and emails you the login.",
+    title: "We prepare your account",
+    body: "After payment, our team uses your checkout details to prepare your AI Ad Engine account for the plan you selected.",
+  },
+  {
+    title: "Receive your login details",
+    body: DELIVERY_PROMISE,
   },
   {
     title: "Connect your advertising accounts",
-    body: "Facebook and Instagram, Google, TikTok. Connect the ones you already use. You only do this once.",
+    body: "Once you can log in, connect the relevant Meta, Google or TikTok advertising accounts for the channels you want to use.",
   },
   {
-    title: "Launch your first campaign",
-    body: "Set a daily budget in Rands, approve the ad, go live. Then watch leads and spend from your dashboard.",
+    title: "Build and launch your first campaign",
+    body: "Use the support included in your selected plan: Scale is self-service; Dominate adds hands-on help to plan, build and launch. Choose your budget, review the ads and submit your campaign for the advertising platform’s review.",
   },
 ];
 
@@ -64,12 +69,15 @@ export default async function WelcomePage({ searchParams }: PageProps<"/welcome"
               <Check className="size-8 text-brand-2" />
             </span>
 
-            <p className="eyebrow mt-7">Payment received</p>
+            <p className="eyebrow mt-7">{confirmed ? "Payment received" : "After checkout"}</p>
             <h1 className="display mx-auto mt-4 max-w-4xl text-[clamp(2rem,6vw,3.6rem)] uppercase">
               Welcome to AI Ad Engine.
             </h1>
             <p className="mx-auto mt-5 max-w-lg text-[17px] leading-relaxed text-muted">
-              You are in. Your subscription is active and our team is building your account now.
+              {confirmed
+                ? "Your payment has been received. Our team will prepare your AI Ad Engine account."
+                : "Once your payment is confirmed, our team will prepare your AI Ad Engine account. Your confirmation email is your receipt."}{" "}
+              {DELIVERY_PROMISE}
             </p>
 
             {plan ? (
@@ -95,7 +103,7 @@ export default async function WelcomePage({ searchParams }: PageProps<"/welcome"
 
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <ButtonLink href="/book-a-demo" size="lg">
-                Book your setup call
+                Book your 15-minute setup call
               </ButtonLink>
               <ButtonLink href="#next" variant="ghost" size="lg">
                 What happens next
@@ -112,7 +120,7 @@ export default async function WelcomePage({ searchParams }: PageProps<"/welcome"
               />
             ) : (
               <p className="mt-6 text-sm text-muted-2">
-                A confirmation email is on its way to the address you used at checkout.
+                Check the email address you used at checkout for your payment confirmation.
               </p>
             )}
           </Container>
@@ -138,7 +146,7 @@ export default async function WelcomePage({ searchParams }: PageProps<"/welcome"
           </ol>
 
           <div className="mt-10 rounded-card border border-line bg-navy-2/70 p-6">
-            <h2 className="text-[16px] font-semibold">Need a hand right now?</h2>
+            <h2 className="text-[16px] font-semibold">Need help with your account?</h2>
             <p className="mt-2 text-[15px] leading-relaxed text-muted">
               Reply to your welcome email or use the{" "}
               <Link href="/contact" className="text-brand-2 underline underline-offset-4">

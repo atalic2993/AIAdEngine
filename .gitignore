@@ -8,6 +8,7 @@ Thumbs.db
 
 # Playwright / agent scratch output
 .playwright-mcp/
+.worktrees/
 
 # Vercel link
 /.vercel
