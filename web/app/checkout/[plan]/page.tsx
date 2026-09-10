@@ -55,8 +55,8 @@ export default async function CheckoutPage({ params }: PageProps<"/checkout/[pla
               Start {plan.name}
             </h1>
             <p className="mt-2 max-w-md text-[14px] leading-relaxed text-muted">
-              Fill in your details, agree to the terms, then pay securely on PayFast. Your
-              subscription renews monthly until you cancel.
+              Enter your business details, accept the terms and continue to PayFast for secure
+              payment. Your plan renews monthly until cancelled.
             </p>
 
             <div className="mt-6">
@@ -82,6 +82,7 @@ export default async function CheckoutPage({ params }: PageProps<"/checkout/[pla
               <p className="mt-1.5 text-xs text-muted-2">
                 Billed monthly in advance. Month-to-month. Cancel anytime.
               </p>
+              <p className="mt-3 text-[13px] leading-relaxed text-muted">{plan.positioning}</p>
 
               <ul className="mt-4 grid gap-1.5 border-t border-line pt-4">
                 {plan.features.map((feature) => (

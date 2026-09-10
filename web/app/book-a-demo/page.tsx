@@ -11,12 +11,12 @@ import { breadcrumbSchema, graph, webPageSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Book a demo",
   description:
-    "Book a free walkthrough of AI Ad Engine. Pick a time that suits you. Open to everyone, whether you are already subscribed or still deciding.",
+    "Book a free 15-minute demo of AI Ad Engine. See campaign creation, launch, reporting and lead follow-up, then ask your questions. No payment needed.",
   alternates: { canonical: "/book-a-demo" },
   openGraph: {
     title: "Book a demo of AI Ad Engine",
     description:
-      "A free walkthrough on a call. Pick a time that suits you. No payment needed to book.",
+      "See the full workflow in a free 15-minute screen share. No payment needed and no pressure to subscribe.",
     url: "/book-a-demo",
   },
 };
@@ -26,27 +26,27 @@ const CALENDAR_ID = "O1KPRvwQk4LHi59vYQUT";
 const CALENDAR_URL = `https://api.leadconnectorhq.com/widget/booking/${CALENDAR_ID}`;
 
 const POINTS = [
-  "Free, 30 minutes, on a screen share.",
-  "No payment needed to book, and no pressure to sign up on the call.",
-  "Already subscribed? Use the same slot as your setup session.",
+  "Free 15-minute screen share.",
+  "No payment needed.",
+  "No pressure to subscribe.",
 ];
 
 const AGENDA = [
   {
-    title: "We look at your business",
-    body: "What you sell, who buys it and where they are. Bring your website or your Facebook page if you have one.",
+    title: "Your business brief · 2 minutes",
+    body: "Tell us what you sell, who you want to reach and what you want your advertising to achieve.",
   },
   {
-    title: "We open the platform",
-    body: "A live look at connecting your ad accounts, building a campaign and writing the ads with AI, on a real screen and not a slide deck.",
+    title: "Campaign to launch · 6 minutes",
+    body: "See an example campaign move from a business brief to AI-assisted ads, a budget and the steps to launch.",
   },
   {
-    title: "We talk numbers in Rands",
-    body: "What you would spend on ads, what the subscription costs and whether the whole thing makes sense for you right now.",
+    title: "Reporting and follow-up · 3 minutes",
+    body: "See where to review campaign performance, track new leads and manage the next follow-up.",
   },
   {
-    title: "You decide, or you do not",
-    body: "No pressure to sign up on the call. If it is not a fit we will say so.",
+    title: "Your questions · 4 minutes",
+    body: "Ask about the workflow, plan support or costs, including the advertising budget paid separately from your subscription.",
   },
 ];
 
@@ -59,7 +59,7 @@ export default function BookADemoPage() {
             path: "/book-a-demo",
             name: "Book a demo of AI Ad Engine",
             description:
-              "Book a free walkthrough of AI Ad Engine. Pick a time that suits you. No payment needed to book.",
+              "Book a free 15-minute demo of AI Ad Engine, from business brief to launch, reporting and lead follow-up. No payment needed.",
           }),
           breadcrumbSchema([
             { name: "Home", path: "/" },
@@ -76,11 +76,11 @@ export default function BookADemoPage() {
               <div>
                 <p className="eyebrow">Book a demo</p>
                 <h1 className="display mt-4 text-[clamp(2rem,4.6vw,3.4rem)] uppercase">
-                  See it live before you decide.
+                  See the full workflow in 15 minutes.
                 </h1>
                 <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-muted">
-                  Pick a time and we will walk you through AI Ad Engine on a call, screen shared,
-                  your questions answered.
+                  We will show you how a campaign moves from business brief to launch, reporting
+                  and lead follow-up, then answer your questions.
                 </p>
 
                 <ul className="mt-7 space-y-3">
@@ -143,14 +143,13 @@ export default function BookADemoPage() {
 
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
               <div className="rounded-card border border-line bg-navy-2/70 p-6">
-                <h3 className="text-[16px] font-semibold">Rather not sit through a call?</h3>
+                <h3 className="text-[16px] font-semibold">Prefer a quick preview?</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-muted">
                   Watch the{" "}
                   <Link href="/#demo" className="text-brand-2 underline underline-offset-4">
                     recorded walkthrough
                   </Link>{" "}
-                  instead. It covers the same ground in under two minutes, and you can email us
-                  anything it does not answer from the{" "}
+                  for an introduction to the platform, then send your questions through the{" "}
                   <Link href="/contact" className="text-brand-2 underline underline-offset-4">
                     contact page
                   </Link>

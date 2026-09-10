@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/json-ld";
 import { breadcrumbSchema, graph, webPageSchema } from "@/lib/schema";
 
 const DESCRIPTION =
-  "Contact AI Ad Engine about plans, billing or your account. Email support, or book a free walkthrough if you would rather talk it through.";
+  "Ask AI Ad Engine about the platform, plans, billing or your account. Email your question or book a free 15-minute demo to see the workflow.";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -48,12 +48,11 @@ export default function ContactPage() {
           <div className="max-w-2xl">
             <p className="eyebrow">Contact</p>
             <h1 className="display mt-4 text-[clamp(1.9rem,5.5vw,3rem)] uppercase">
-              Talk to a human.
+              Get the answer you need.
             </h1>
             <p className="mt-5 text-[16px] leading-relaxed text-muted">
-              You do not need a demo call to sign up, but if something is unclear, ask first or
-              book a walkthrough. We would rather answer a question than have you subscribe to the
-              wrong plan.
+              Ask about the platform, plans, billing or your account. If seeing the workflow
+              would be easier, book a free 15-minute demo.
             </p>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
@@ -63,8 +62,8 @@ export default function ContactPage() {
               >
                 <span className="eyebrow">Book a demo</span>
                 <span className="text-[15px]">
-                  Pick a time and we will walk you through the platform on a call. Free, and you do
-                  not have to be a customer.
+                  See campaign creation, reporting and lead follow-up in a free 15-minute screen
+                  share. No payment needed.
                 </span>
               </Link>
 
@@ -78,9 +77,10 @@ export default function ContactPage() {
                 </span>
               </a>
               <div className="flex min-h-[110px] flex-col justify-between rounded-card border border-line bg-navy-2/70 p-5">
-                <span className="eyebrow">Support hours</span>
+                <span className="eyebrow">Billing or account help</span>
                 <span className="text-[15px] text-muted">
-                  Monday to Friday, South African time.
+                  Email your question with the address you used at checkout and your payment
+                  reference, if available.
                 </span>
               </div>
 

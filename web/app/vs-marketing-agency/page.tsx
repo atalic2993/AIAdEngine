@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { ButtonLink, Check, Container, Cross, Section } from "@/components/ui";
+import { ButtonLink, Check, Container, Section } from "@/components/ui";
 import { JsonLd } from "@/components/json-ld";
 import { CHANNELS } from "@/lib/channels";
 import { PLAN_LIST, RESULTS_DISCLAIMER, SPEND_DISCLOSURE } from "@/lib/plans";
@@ -12,7 +12,7 @@ import { absoluteUrl } from "@/lib/site";
 const PATH = "/vs-marketing-agency";
 
 const DESCRIPTION =
-  "What a marketing agency retainer actually buys, what it does not, and where a self-service advertising platform is the better fit for a South African small business.";
+  "Compare advertising software, guided support and a full marketing agency for your South African business. Consider scope, control, turnaround, ownership and total cost.";
 
 export const metadata: Metadata = {
   title: "Marketing Agency Alternative in South Africa",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
  */
 const HONEST = [
   {
-    heading: "Where an agency genuinely wins",
+    heading: "When an agency fits",
     kind: "agency" as const,
     points: [
       "Strategy work that goes well beyond advertising",
@@ -42,34 +42,38 @@ const HONEST = [
     ],
   },
   {
-    heading: "Where a platform wins",
+    heading: "When the platform fits",
     kind: "platform" as const,
     points: [
-      "Monthly cost you can predict, from R599",
+      "A monthly subscription from R599, with advertising spend separate",
       "Changes you make yourself, when you want them",
-      "No minimum term and no lock-in",
-      "Small budgets that a retainer would swallow whole",
-      "Owners who want to see what is happening, not a monthly slide deck",
+      "Month-to-month plans, subject to the cancellation policy",
+      "Owners who want to manage campaigns and lead follow-up in one place",
+      "A choice of self-service or done-with-you campaign help",
     ],
   },
 ];
 
 const COSTS = [
   {
-    title: "The retainer is separate from the ad spend",
-    body: "With an agency you are usually paying two things: the fee for their time, and the money that actually goes to Meta, Google or TikTok. On a small budget the fee can end up larger than the spend it manages.",
+    title: "Scope: what work is included?",
+    body: "Scale gives you the platform to manage your own advertising. Dominate adds help to plan, build and launch campaigns. For broader brand strategy, creative production or ongoing management, compare the services in an agency proposal.",
   },
   {
-    title: "Turnaround has a cost too",
-    body: "Wanting a headline changed on a Tuesday and getting it changed the following Monday is a real cost, it is just not on the invoice. Seasonal and promotional businesses feel this most.",
+    title: "Control: who makes campaign decisions?",
+    body: "With AI Ad Engine, you stay involved in your offer, budget and campaign approvals. With an agency, agree who can change campaigns and what needs your approval before work starts.",
   },
   {
-    title: "Contracts outlast enthusiasm",
-    body: "Retainers are commonly signed for a fixed term. If the fit turns out to be wrong in month two, that is not always something you can act on.",
+    title: "Turnaround: who makes the changes?",
+    body: "Self-service lets you edit campaigns yourself. If you need hands-on help, agree how requests and approvals will work. Advertising platforms still control their own ad review times.",
   },
   {
-    title: "You may not own the account",
-    body: "Worth asking before you sign, with any provider: whose ad account is it, and what leaves with you if you leave. Your advertising history has value.",
+    title: "Ownership: what stays with your business?",
+    body: "Before choosing any provider, confirm who owns the advertising accounts, who has access and what happens to your data and campaign history when you leave.",
+  },
+  {
+    title: "Total cost: what sits outside the fee?",
+    body: "Compare the subscription or service fee, advertising budget and any separately quoted work. AI Ad Engine starts at R599 per month, with advertising spend separate. Check each provider’s cancellation terms too.",
   },
 ];
 
@@ -77,12 +81,12 @@ const FAQS = [
   {
     question: "Is AI Ad Engine a marketing agency?",
     answer:
-      "No. AI Ad Engine is an advertising platform. The Scale plan is primarily self-service. The Dominate plan adds Done-With-You campaign assistance, priority onboarding and support, which is help using the platform rather than an agency retainer.",
+      "AI Ad Engine is an advertising and lead-management platform. Scale is self-service. Dominate adds done-with-you campaign setup, help building and launching campaigns, priority onboarding and priority support. You stay involved in campaign decisions; it is not a full agency retainer.",
   },
   {
     question: "How much does a marketing agency cost in South Africa?",
     answer:
-      "It varies widely by agency, scope and budget size, and is usually quoted per client rather than published. What is consistent is the structure: a monthly fee for the agency, plus your advertising spend on top. AI Ad Engine plans start at R599 a month, with advertising spend still separate.",
+      "Ask for a quote based on the work you need, then check whether advertising spend, creative production and other services are included. AI Ad Engine plans start at R599 a month, with advertising spend separate.",
   },
   {
     question: "Should I leave my agency?",
@@ -126,14 +130,13 @@ export default function VsMarketingAgencyPage() {
           <div className="rule-grid pointer-events-none absolute inset-0" aria-hidden="true" />
           <Container className="relative py-16 sm:py-24">
             <div className="max-w-3xl">
-              <p className="eyebrow">Platform or agency</p>
+              <p className="eyebrow">Compare your options</p>
               <h1 className="display mt-4 text-[clamp(2rem,5.2vw,3.4rem)] uppercase">
-                What a retainer buys, and what it does not.
+                Software, guided support or a full agency?
               </h1>
               <p className="mt-6 text-[17px] leading-relaxed text-muted">
-                Hiring an agency is a reasonable decision. So is not hiring one. The question is
-                not which is better in the abstract, it is which one fits the size of your
-                advertising budget and how involved you actually want to be.
+                The right choice depends on your budget, the work you want to keep in-house and
+                how much specialist help you need.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -141,7 +144,7 @@ export default function VsMarketingAgencyPage() {
                   See pricing
                 </ButtonLink>
                 <ButtonLink href="/book-a-demo" size="lg" variant="ghost">
-                  Book a demo
+                  Book a free 15-minute demo
                 </ButtonLink>
               </div>
             </div>
@@ -151,7 +154,7 @@ export default function VsMarketingAgencyPage() {
         <Section className="border-b border-line">
           <Container>
             <h2 className="display max-w-3xl text-[clamp(1.7rem,4vw,2.6rem)] uppercase">
-              Neither one wins every time.
+              Choose the level of help your business needs.
             </h2>
             <div className="mt-10 grid gap-4 lg:grid-cols-2">
               {HONEST.map((column) => {
@@ -195,13 +198,13 @@ export default function VsMarketingAgencyPage() {
           <Container>
             <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:gap-16">
               <div>
-                <p className="eyebrow">The maths</p>
+                <p className="eyebrow">What to compare</p>
                 <h2 className="display mt-4 text-[clamp(1.7rem,4vw,2.6rem)] uppercase">
-                  Four things worth checking before you sign.
+                  Five things to check before you choose.
                 </h2>
                 <p className="mt-5 text-[16px] leading-relaxed text-muted">
-                  None of these make an agency the wrong choice. They are simply the parts that
-                  tend to surface after the contract, rather than before it.
+                  Compare the work, responsibilities and full cost of each option before you
+                  commit.
                 </p>
               </div>
 
@@ -209,7 +212,7 @@ export default function VsMarketingAgencyPage() {
                 {COSTS.map((cost) => (
                   <div key={cost.title} className="py-5">
                     <h3 className="flex items-start gap-3 text-[16px] font-semibold">
-                      <Cross className="mt-1 text-warn/80" />
+                      <Check className="mt-1 text-brand" />
                       {cost.title}
                     </h3>
                     <p className="mt-2 pl-7 text-[15px] leading-relaxed text-muted">{cost.body}</p>
@@ -225,11 +228,11 @@ export default function VsMarketingAgencyPage() {
             <div className="mx-auto max-w-2xl text-center">
               <p className="eyebrow">Plans</p>
               <h2 className="display mt-3 text-[clamp(1.7rem,4vw,2.6rem)] uppercase">
-                Priced per month, not per contract.
+                Choose self-service or guided support.
               </h2>
               <p className="mt-4 text-[15px] text-muted">
-                Both plans are month-to-month. Dominate is the closer comparison to agency help,
-                because it adds hands-on assistance getting campaigns built and launched.
+                Both plans include the platform on a month-to-month subscription. Choose Scale
+                to run campaigns yourself or Dominate for hands-on help to plan, build and launch.
               </p>
             </div>
 
