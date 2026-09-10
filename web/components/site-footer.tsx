@@ -7,7 +7,7 @@ import { BUSINESS, DELIVERY_PROMISE } from "@/lib/business";
 const COMPANY_LINKS = [
   { href: "/", label: "AI Ad Engine" },
   { href: "/#pricing", label: "Pricing" },
-  { href: "/book-a-demo", label: "Book a demo" },
+  { href: "/book-a-demo", label: "Book a 15-minute demo" },
   { href: "/contact", label: "Contact" },
   { href: "/terms", label: "Terms & Conditions" },
   { href: "/refund-cancellation-policy", label: "Refund & Cancellation Policy" },
@@ -39,8 +39,9 @@ export function SiteFooter() {
               </span>
             </div>
             <p className="mt-4 text-sm text-muted">
-              AI-powered advertising across Facebook, Instagram, Google and TikTok. Built for South
-              African businesses, priced in Rands.
+              Plan and manage advertising across four major platforms, then keep every enquiry
+              organised in one CRM and sales pipeline. Built for South African businesses and
+              priced in Rands.
             </p>
           </div>
 

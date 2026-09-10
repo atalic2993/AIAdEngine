@@ -11,9 +11,8 @@ const NAV = [
 ];
 
 /**
- * Book a demo. Deliberately not the same button as "Get started": that one
- * takes the money, this one takes the hesitant. Bordered glass rather than
- * solid brand, so the two never compete for the same glance.
+ * Booking a demo is deliberately not the same action as choosing a plan.
+ * Bordered glass keeps this as the quieter option beside the primary button.
  */
 function BookDemoLink() {
   return (
@@ -22,7 +21,8 @@ function BookDemoLink() {
       className="cta-demo header-cta inline-flex min-h-[44px] touch-manipulation items-center justify-center rounded-xl border border-brand/45 bg-brand-soft font-semibold tracking-tight text-ink transition-[background-color,border-color,box-shadow,transform] duration-150 hover:border-brand/70 hover:bg-brand/25 hover:shadow-[0_10px_30px_-14px_rgba(29,140,255,0.9)] active:translate-y-px"
     >
       <span className="cta-demo-dot" aria-hidden="true" />
-      Book a demo
+      <span className="sm:hidden">Book a demo</span>
+      <span className="hidden sm:inline">Book a 15-minute demo</span>
     </Link>
   );
 }
@@ -48,7 +48,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2 sm:gap-2.5">
           <BookDemoLink />
           <ButtonLink href="/#pricing" className="header-cta">
-            Get started
+            Choose a plan
           </ButtonLink>
         </div>
       </Container>

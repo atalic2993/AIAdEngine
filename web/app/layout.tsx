@@ -37,22 +37,22 @@ export const metadata: Metadata = {
     template: "%s | AI Ad Engine",
   },
   description:
-    "Launch and manage advertising across Facebook, Instagram, Google and TikTok from one AI-powered platform. Built for South African businesses. From R599/month, month-to-month.",
+    "Plan and manage ads across Facebook, Instagram, Google and TikTok, then track every enquiry in one CRM and sales pipeline. Built for South African businesses.",
   openGraph: {
     type: "website",
     locale: "en_ZA",
     url: SITE_URL,
     siteName: "AI Ad Engine",
-    title: "Stop boosting posts. Start running ads that grow your business.",
+    title: "AI Ad Software for South African Businesses | AI Ad Engine",
     description:
-      "Smarter ads. Bigger results. One platform, four major advertising channels, built for South African businesses. From R599/month.",
+      "Plan and manage ads across Facebook, Instagram, Google and TikTok, then track every enquiry in one CRM and sales pipeline. Built for South African businesses.",
     images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "AI Ad Engine" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Ad Engine: smarter ads, bigger results",
+    title: "AI Ad Software for South African Businesses | AI Ad Engine",
     description:
-      "Facebook, Instagram, Google and TikTok ads from one AI-powered platform. From R599/month.",
+      "Plan and manage ads across Facebook, Instagram, Google and TikTok, then track every enquiry in one CRM and sales pipeline. Built for South African businesses.",
     images: ["/og.jpg"],
   },
   robots: { index: true, follow: true },

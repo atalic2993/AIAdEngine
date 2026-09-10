@@ -32,7 +32,7 @@ export function organisationSchema() {
     },
     image: absoluteUrl("/og.jpg"),
     description:
-      "AI-powered advertising platform for South African businesses, covering Facebook, Instagram, Google and TikTok.",
+      "Plan and manage ads across Facebook, Instagram, Google and TikTok, then track every enquiry in one CRM and sales pipeline. Built for South African businesses.",
     address,
     areaServed: { "@type": "Country", name: "South Africa" },
     contactPoint: {
@@ -81,7 +81,7 @@ export function softwareSchema() {
     operatingSystem: "Web browser",
     url: `${SITE_URL}/`,
     description:
-      "Launch and manage Facebook, Instagram, Google and TikTok advertising from one AI-powered platform, priced in Rands and billed month-to-month.",
+      "Plan and manage ads across Facebook, Instagram, Google and TikTok, then track every enquiry in one CRM and sales pipeline. Built for South African businesses.",
     publisher: { "@id": ORGANISATION_ID },
     featureList: [
       "AI Ad Launcher",

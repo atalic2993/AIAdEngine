@@ -23,7 +23,7 @@ export const PLANS: Record<PlanId, Plan> = {
     priceLabel: "R599",
     tagline: "Self-service",
     positioning:
-      "For business owners who want a simple, affordable way to launch and manage powerful advertising themselves.",
+      "For hands-on business owners who want to create, manage and track their own advertising from one place.",
     cta: "Start Scale — R599/mo",
     features: [
       "AI Ad Launcher",
@@ -47,11 +47,11 @@ export const PLANS: Record<PlanId, Plan> = {
     priceLabel: "R1,599",
     tagline: "Done-with-you",
     positioning:
-      "For businesses that want the technology plus hands-on help getting their advertising built, launched and moving in the right direction.",
+      "For businesses that want the full platform plus hands-on help to plan, build and launch their campaigns.",
     cta: "Start Dominate — R1,599/mo",
     features: [
       "Everything in Scale",
-      "Done-With-You campaign setup",
+      "Done-with-you campaign setup",
       "Help building campaigns",
       "Help launching campaigns",
       "Priority onboarding",
