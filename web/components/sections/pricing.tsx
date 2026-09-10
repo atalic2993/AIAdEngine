@@ -23,11 +23,12 @@ export function Pricing() {
           <div>
             <p className="eyebrow">Pricing</p>
             <h2 className="display mt-3 text-[clamp(1.7rem,3.6vw,2.5rem)] uppercase">
-              Two plans. Both month-to-month.
+              Choose how much help you want.
             </h2>
           </div>
           <p className="text-[15px] leading-relaxed text-muted lg:max-w-sm lg:text-right">
-            Same platform on both. The difference is how much of the work we do with you.
+            Scale gives you the platform to run your own campaigns. Dominate adds hands-on help.
+            Both are priced in Rands, month-to-month.
           </p>
         </div>
 
@@ -105,7 +106,7 @@ export function Pricing() {
         </div>
 
         <p className="mt-4 text-center text-xs leading-relaxed text-muted-2">
-          <strong className="font-semibold text-muted">Important:</strong> {SPEND_DISCLOSURE}
+          {SPEND_DISCLOSURE}
         </p>
       </Container>
     </Section>

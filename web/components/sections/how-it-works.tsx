@@ -4,24 +4,34 @@ import { FacebookMark, GoogleMark, InstagramMark, TikTokMark } from "@/component
 const STEPS = [
   {
     number: "01",
-    title: "Connect",
-    body: "Connect your advertising accounts. It takes a few clicks and you only do it once.",
-    channels: true,
+    title: "Research",
+    body: "Get clear on your offer, market and customer before spending.",
   },
   {
     number: "02",
-    title: "Create",
-    body: "Tell AI Ad Engine about your business, your offer and what you want to advertise.",
+    title: "Build",
+    body: "Turn the business brief into campaign structure, angles and copy.",
   },
   {
     number: "03",
     title: "Launch",
-    body: "Use AI to help build your campaign, choose who sees it and write the advertising.",
+    body: "Approve the campaign, choose the budget and go live.",
+    channels: true,
   },
   {
     number: "04",
-    title: "Grow",
-    body: "Track your campaigns, leads and performance from one simple platform.",
+    title: "Analyse",
+    body: "See spend, enquiries and cost per lead in plain language.",
+  },
+  {
+    number: "05",
+    title: "Improve",
+    body: "Use performance signals to decide what to adjust next.",
+  },
+  {
+    number: "06",
+    title: "Follow up",
+    body: "Move every enquiry through the pipeline towards a sale.",
   },
 ];
 
@@ -31,10 +41,10 @@ export function HowItWorks() {
       <Container>
         <p className="eyebrow">How it works</p>
         <h2 className="display mt-4 max-w-2xl text-[clamp(1.9rem,5vw,3.1rem)] uppercase">
-          Four steps from signing up to running.
+          From the first idea to the next sales conversation.
         </h2>
 
-        <ol className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <ol className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {STEPS.map((step) => (
             <li
               key={step.number}

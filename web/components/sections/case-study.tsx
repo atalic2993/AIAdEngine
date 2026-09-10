@@ -6,9 +6,9 @@ export function CaseStudy() {
   return (
     <Section id="results" className="border-b border-line">
       <Container>
-        <p className="eyebrow">South African customer result</p>
+        <p className="eyebrow">A reported South African customer result</p>
         <h2 className="display mt-4 max-w-3xl text-[clamp(1.9rem,5vw,3.1rem)] uppercase">
-          R4K a month to R165K+ a month in online sales.
+          From R4,000 to more than R165,000 in reported monthly online sales.
         </h2>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
@@ -34,7 +34,7 @@ export function CaseStudy() {
 
             <dl className="mt-8 grid grid-cols-[1fr_auto_1fr] items-end gap-3">
               <div>
-                <dt className="eyebrow">Before</dt>
+                <dt className="eyebrow">Reported before</dt>
                 <dd className="display tnum mt-2 text-[clamp(1.5rem,4.5vw,2.25rem)] text-muted">
                   R4K<span className="text-base text-muted-2">/mo</span>
                 </dd>
@@ -47,7 +47,7 @@ export function CaseStudy() {
                 →
               </div>
               <div>
-                <dt className="eyebrow">After roughly 6 months</dt>
+                <dt className="eyebrow">Reported after</dt>
                 <dd className="display tnum mt-2 text-[clamp(1.75rem,5.5vw,2.75rem)] text-brand-2">
                   R165K+<span className="text-base text-brand/70">/mo</span>
                 </dd>
@@ -59,18 +59,16 @@ export function CaseStudy() {
             </dl>
 
             <p className="mt-6 text-[15px] leading-relaxed text-ink/90">
-              Paid digital advertising, a clearer offer and steady optimisation took Polvytjie from
-              a small trickle of online orders to a genuine online sales channel next to their
-              physical boutique.
+              Polvytjie has given AI Ad Engine permission to share its reported before-and-after online sales figures and to act as a customer reference.
             </p>
           </div>
 
           {/* Verify it yourself. */}
           <div className="rounded-card border border-line bg-navy-2/70 p-6 sm:p-8">
-            <h3 className="display text-xl uppercase">Do not just take our word for it.</h3>
+            <h3 className="display text-xl uppercase">Speak to a customer reference.</h3>
             <p className="mt-4 text-[15px] leading-relaxed text-muted">
-              Want to speak to a real AI Ad Engine customer? Polvytjie has given us permission to
-              use them as a reference. Go and look at the store, or contact the owners directly.
+              Visit the store or contact Polvytjie directly to ask about their experience.
+              These are customer-reported figures, not a promise of what your business will achieve.
             </p>
 
             <ul className="mt-6 space-y-3">

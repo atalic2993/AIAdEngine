@@ -1,12 +1,12 @@
 import { Container, Section } from "@/components/ui";
 
 const PROBLEMS = [
-  "Boost Facebook posts and hope something happens",
-  "Spend hours trying to understand Ads Manager",
-  "Do not know who they should be targeting",
-  "Struggle to write advertising copy",
-  "Cannot tell which campaigns are actually working",
-  "Or pay a traditional agency thousands of Rands every month",
+  "Campaigns sit in separate advertising dashboards",
+  "Enquiries get scattered across inboxes and phones",
+  "Nobody knows which leads still need a reply",
+  "Follow-up depends on memory or a spreadsheet",
+  "Advertising reports stop at clicks and enquiries",
+  "Sales conversations lose momentum before a decision",
 ];
 
 export function Problem() {
@@ -16,10 +16,11 @@ export function Problem() {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
           <div>
             <h2 className="display text-[clamp(1.9rem,5vw,3.1rem)] uppercase">
-              Running ads should not require a marketing degree.
+              Getting the click is only half the job.
             </h2>
             <p className="mt-5 max-w-md text-[17px] leading-relaxed text-muted">
-              Most small business owners end up doing one of these six things.
+              When campaigns, enquiries and follow-up live in separate places, it is easy to lose
+              track of interested customers. More clicks alone will not fix that gap.
             </p>
           </div>
 
@@ -46,10 +47,10 @@ export function Problem() {
             </ul>
 
             <div className="mt-8 rounded-card border border-brand/35 bg-brand-soft p-6">
-              <p className="display text-xl uppercase text-brand-2">There is a better way.</p>
+              <p className="display text-xl uppercase text-brand-2">Connect the work after the click.</p>
               <p className="mt-3 text-[15px] leading-relaxed text-ink/90">
-                AI Ad Engine uses AI and automation to make launching and managing digital
-                advertising dramatically simpler.
+                AI Ad Engine brings advertising and customer records into one workspace. See each
+                enquiry in your sales pipeline and keep the next conversation moving.
               </p>
             </div>
           </div>

@@ -1,5 +1,4 @@
 import { Container, Section } from "@/components/ui";
-import { FacebookMark, GoogleMark, InstagramMark, TikTokMark } from "@/components/logos";
 import { BoltMark } from "@/components/brand";
 
 type Feature = {
@@ -11,48 +10,42 @@ type Feature = {
 
 const FEATURES: Feature[] = [
   {
-    title: "AI Ad Launcher",
-    body: "Use AI to help create and launch advertising campaigns.",
+    title: "Guided campaign creation",
+    body: "Turn your business brief into a campaign you can review and approve.",
     Mark: BoltMark,
     tint: "text-brand-2",
   },
   {
-    title: "Meta Ads",
-    body: "Launch advertising across Facebook and Instagram.",
-    Mark: FacebookMark,
-    tint: "text-[#0866FF]",
+    title: "Cross-channel management",
+    body: "Manage connected advertising accounts in one workspace to keep campaigns in view.",
   },
   {
-    title: "Google Ads",
-    body: "Reach customers actively searching for products and services.",
-    Mark: GoogleMark,
+    title: "Advertising copy",
+    body: "Use AI-assisted drafts as a starting point, then edit them to fit your offer and voice.",
   },
   {
-    title: "TikTok Ads",
-    body: "Launch advertising to TikTok audiences.",
-    Mark: TikTokMark,
-    tint: "text-ink",
+    title: "Creative direction",
+    body: "Explore campaign angles and content ideas before deciding what to put in your ads.",
   },
   {
-    title: "AI-powered campaign creation",
-    body: "Get assistance with campaign creation, targeting and advertising content.",
+    title: "Performance reporting",
+    body: "See spend, enquiries and cost per lead, so you can decide what to adjust next.",
   },
   {
-    title: "Instagram placements",
-    body: "Feed, Reels and Stories, without setting each one up by hand.",
-    Mark: InstagramMark,
+    title: "CRM customer records",
+    body: "Keep customer details and enquiries together, ready for the next conversation.",
   },
   {
-    title: "CRM & pipeline",
-    body: "Keep leads organised and track opportunities from enquiry to sale.",
+    title: "Sales pipeline",
+    body: "Track opportunities from enquiry towards a sale and see which stage each lead has reached.",
   },
   {
     title: "Lead management",
-    body: "Keep customer enquiries in one place instead of across inboxes and phones.",
+    body: "Keep enquiries organised so you can see who still needs follow-up.",
   },
   {
-    title: "Campaign reporting",
-    body: "See how campaigns are performing without decoding complicated advertising dashboards.",
+    title: "Human support",
+    body: "Get help when needed. Dominate adds hands-on campaign assistance, priority onboarding and support.",
   },
 ];
 
@@ -62,7 +55,7 @@ export function Features() {
       <Container>
         <p className="eyebrow">What is included</p>
         <h2 className="display mt-4 max-w-2xl text-[clamp(1.9rem,5vw,3.1rem)] uppercase">
-          Everything needed to run your own ads.
+          Tools for the campaign and the conversation.
         </h2>
 
         <ul className="mt-12 grid gap-px overflow-hidden rounded-card border border-line bg-white/[0.07] sm:grid-cols-2 lg:grid-cols-3">

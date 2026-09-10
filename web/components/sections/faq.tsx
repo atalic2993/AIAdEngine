@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ButtonLink, Container, Section } from "@/components/ui";
 import { DELIVERY_PROMISE } from "@/lib/business";
+import { RESULTS_DISCLAIMER, SPEND_DISCLOSURE } from "@/lib/plans";
 
 /**
  * "plain" is the same answer as flat text. The visible page can use a link or
@@ -10,7 +11,7 @@ import { DELIVERY_PROMISE } from "@/lib/business";
 const FAQS: Array<{ q: string; a: React.ReactNode; plain?: string }> = [
   {
     q: "What is AI Ad Engine?",
-    a: "AI Ad Engine is an AI-powered advertising platform designed to help businesses create, launch and manage digital advertising more easily.",
+    a: "AI Ad Engine connects advertising with lead management. Plan, build and manage campaigns, then keep customer records in the included CRM and track enquiries through your sales pipeline.",
   },
   {
     q: "Which advertising platforms can I use?",
@@ -18,11 +19,23 @@ const FAQS: Array<{ q: string; a: React.ReactNode; plain?: string }> = [
   },
   {
     q: "Do I need advertising experience?",
-    a: "No. AI Ad Engine is designed to simplify the campaign creation and management process.",
+    a: "You do not need to be an advertising specialist. Guided campaign creation helps you get started, but you still review the campaign, choose your budget and manage follow-up. Dominate adds hands-on help with planning, building and launching campaigns.",
+  },
+  {
+    q: "Who owns my advertising accounts?",
+    a: "You connect your business’s advertising accounts to AI Ad Engine. Keep ownership and administrator access with your business, so you retain control of the accounts you use to advertise.",
+  },
+  {
+    q: "Is a CRM included?",
+    a: "Yes. Both plans include a CRM, which keeps customer details and enquiries together, plus a sales pipeline for tracking opportunities from enquiry towards a sale. Your team still needs to follow up with customers.",
+  },
+  {
+    q: "What does the AI do, and what do I control?",
+    a: "AI assists with campaign structure, advertising copy and creative direction. You review and edit its suggestions, approve the campaign and choose the budget. Use performance reports to decide what to adjust; AI does not replace your business judgement or customer follow-up.",
   },
   {
     q: "Is my advertising budget included?",
-    a: "No. Your AI Ad Engine subscription and your advertising spend are separate. The money paid to Meta, Google or TikTok for the ads themselves is billed by those platforms.",
+    a: SPEND_DISCLOSURE,
   },
   {
     q: "How do I get access after I pay?",
@@ -47,11 +60,11 @@ const FAQS: Array<{ q: string; a: React.ReactNode; plain?: string }> = [
   },
   {
     q: "Does AI Ad Engine guarantee leads or sales?",
-    a: "No. Advertising results depend on factors including industry, market, advertising budget, offer, competition, creative and customer follow-up.",
+    a: `No. Results depend on your offer, market, budget, competition, creative and customer follow-up. ${RESULTS_DISCLAIMER}`,
   },
   {
     q: "What is the difference between Scale and Dominate?",
-    a: "Scale is primarily our self-service option. Dominate includes additional Done-With-You campaign assistance, onboarding and support.",
+    a: "Scale is the self-service plan for businesses that want to run their own campaigns. Dominate includes the same platform plus done-with-you campaign setup, help building and launching campaigns, priority onboarding and priority support.",
   },
 ];
 
@@ -116,18 +129,17 @@ export function ClosingCta() {
       <div className="rule-grid pointer-events-none absolute inset-0" aria-hidden="true" />
       <Container className="relative text-center">
         <h2 className="display mx-auto max-w-3xl text-[clamp(2rem,5.5vw,3.4rem)] uppercase">
-          Your competitors are already advertising. Better.
+          Ready to connect your advertising and follow-up?
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-[16px] text-muted">
-          Pick a plan, connect your accounts and launch your first campaign. No demo call, no
-          contract, no waiting on an agency.
+          Choose the support level that suits your business, or book a 15-minute demo and see the platform before deciding.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <ButtonLink href="/checkout/scale" size="lg" variant="ghost">
-            Start Scale — R599/mo
+          <ButtonLink href="/#pricing" size="lg">
+            Choose your plan
           </ButtonLink>
-          <ButtonLink href="/checkout/dominate" size="lg">
-            Start Dominate — R1,599/mo
+          <ButtonLink href="/book-a-demo" size="lg" variant="ghost">
+            Book a 15-minute demo
           </ButtonLink>
         </div>
       </Container>

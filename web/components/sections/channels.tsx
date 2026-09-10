@@ -106,7 +106,7 @@ export function Channels() {
                 AI Ad Engine
               </p>
               <p className="mt-1 text-sm text-muted">
-                One login. One place to launch, watch and adjust everything.
+                One login connects your campaigns, performance and leads, so you can see the next step.
               </p>
               <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-2">
                 {TAGLINE}
