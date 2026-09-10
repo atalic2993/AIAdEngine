@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "package": "node scripts/package-deploy.mjs"
+    "package": "node scripts/package-deploy.mjs",
+    "check:copy": "node scripts/check-copy.mjs"
   },
   "dependencies": {
     "libphonenumber-js": "^1.13.12",
