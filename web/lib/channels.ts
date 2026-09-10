@@ -190,7 +190,7 @@ export const CHANNELS: Channel[] = [
       {
         question: "Can I advertise in one city only?",
         answer:
-          "Yes. Google campaigns can be limited by location, so a business serving one metro does not pay for clicks from the rest of the country.",
+          "Google campaigns can be limited by location. A business serving one metro can focus spend on people in that area, with location settings reviewed carefully.",
       },
       {
         question: "Do I need to understand keywords to get started?",
