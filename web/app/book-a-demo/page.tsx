@@ -29,6 +29,7 @@ const POINTS = [
   "Free 15-minute screen share.",
   "No payment needed.",
   "No pressure to subscribe.",
+  "Already subscribed? Use the same 15-minute calendar slot as your setup call.",
 ];
 
 const AGENDA = [

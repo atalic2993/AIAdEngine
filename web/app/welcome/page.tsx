@@ -103,7 +103,7 @@ export default async function WelcomePage({ searchParams }: PageProps<"/welcome"
 
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <ButtonLink href="/book-a-demo" size="lg">
-                Book a free 15-minute demo
+                Book your 15-minute setup call
               </ButtonLink>
               <ButtonLink href="#next" variant="ghost" size="lg">
                 What happens next
